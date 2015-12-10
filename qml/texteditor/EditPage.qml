@@ -38,7 +38,6 @@ Page {
         TextArea {
             id: textArea
             width: editPage.width
-            height: editPage.height-header.height
             placeholderText: AppDefaults.PLACE_HOLDER_TEXT
             smooth: true
             wrapMode: TextEdit.Wrap
