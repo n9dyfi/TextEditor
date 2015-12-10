@@ -54,38 +54,22 @@ PageStackWindow {
     initialPage: editPage
     EditPage {
         id: editPage
-        tools: commonTools
-        // Instantiate the Tools component (defined in EditTools.qml)
-        EditTools{
-            id: commonTools
-            visible: true
-        }
     }
 
     // Instantiate the BrowsePage component (defined in BrowsePage.qml)
     BrowsePage {
         id: browsePage;
-        parent: pageStack;
     }
 
     // Instantiate the EditMenu component (defined in EditMenu.qml)
-    EditMenu
-    {
+    EditMenu {
         id: editMenu
-        visualParent: pageStack
     }
 
     // Instantiate the BrowseMenu component (defined in BrowseMenu.qml)
-    BrowseMenu
-    {
+    BrowseMenu {
         id: browseMenu
-        visualParent: pageStack
     }
-
-//    Loader
-//    {
-//        id: pageLoader
-//    }
 
     // Event handlers
 
@@ -112,8 +96,6 @@ PageStackWindow {
 
     // TextEditor requested BrowsePage to be opened for selecting a file.
     onBrowseRequested: {
-//        pageLoader.source = "BrowsePage.qml"
-//        pageStack.push(pageLoader.item,{folderPath:currentFolder,saveAs:saveRequested});
         pageStack.push(browsePage,{folderPath:currentFolder,saveAs:saveRequested});
     }
 
