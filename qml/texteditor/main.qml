@@ -77,7 +77,7 @@ PageStackWindow {
         editPage.content = ""
         editPage.currentFile = fileName
         editPage.currentFolder = folderPath
-        editPage.textAreaHeight = 2*AppDefaults.FONT_SIZE_SMALL
+        editPage.textAreaHeight = AppDefaults.TEXT_AREA_HEIGHT
     }
 
     // Common exit point when Menu>Quit was selected
