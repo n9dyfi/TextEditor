@@ -9,13 +9,13 @@ Page {
     property string currentFolder: ""
     property string currentFile: ""
     property bool save: false
+    property alias textAreaHeight: textArea.height
 
     tools: commonTools
 
     // Instantiate the Tools component (defined in EditTools.qml)
     EditTools{
         id: commonTools
-        visible: true
     }
 
     Header {
@@ -29,18 +29,16 @@ Page {
     Flickable {
         id: flickable
         anchors.top: header.bottom
-        //anchors.margins: - AppDefaults.FONT_SIZE_SMALL
         width: parent.width
         height: parent.height-header.height
         clip: true
         contentHeight: textArea.height
         contentWidth: textArea.width
-        //interactive: true
 
         TextArea {
             id: textArea
             width: editPage.width
-            //focus: false
+            height: editPage.height-header.height
             placeholderText: AppDefaults.PLACE_HOLDER_TEXT
             smooth: true
             wrapMode: TextEdit.Wrap
@@ -97,6 +95,5 @@ Page {
             }
         }
     ]
-
 
 }

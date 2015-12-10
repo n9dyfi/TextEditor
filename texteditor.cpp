@@ -119,7 +119,7 @@ void TextEditor::openConfirmed()
     emit browseRequested(currentFolder, saveRequested);
 }
 
-// Discard current content was confirmed during Toolbar>New.
+// Discard current content was confirmed during Menu>New.
 void TextEditor::newConfirmed()
 {
     currentFile = DEFAULT_FILE;
