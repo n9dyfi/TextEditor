@@ -3,7 +3,7 @@
 var FILE_BG_COLOR_NORMAL = "#00AAAAAA";
 var FILE_BG_COLOR_PRESSED = "steelblue";
 
-var VERSION = "1.0" ;
+var VERSION = "1.1" ;
 var HOMEPAGE = "http://n9dyfi.github.io/TextEditor"
 var COLOR_SCHEME = 18;
 var DEFAULT_MARGIN = 16;
