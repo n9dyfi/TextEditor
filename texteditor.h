@@ -4,6 +4,9 @@
 #include <QDeclarativeItem>
 #include <QFile>
 
+#define SAVE 0
+#define SAVE_AS 1
+
 class TextEditor : public QObject
 {
     Q_OBJECT
@@ -19,7 +22,7 @@ private:
     QString currentContent;
 
 private slots:
-    void saveCurrentContent();
+    void saveCurrentContent(int);
 
 public slots:
     void menuOpenClicked(QString);

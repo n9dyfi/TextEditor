@@ -47,7 +47,7 @@ Page {
         Header {
             id: header
             singleLineHeader: false
-            infoTopText: (saveAs)?"Save as":"Open"
+            infoTopText: (saveAs)?qsTr("Save as"):qsTr("Open")
             infoBottomText: folderPath
             // Save As button
             Button {
@@ -57,7 +57,7 @@ Page {
                 width: 130; height: 40
                 anchors { right: parent.right; rightMargin: defaultMargin
                     verticalCenter: parent.verticalCenter}
-                text: "Save"
+                text: qsTr("Save")
                 onClicked: {
                     saveAsRequested(editPage.content,saveasfile.text);
                 }
@@ -125,7 +125,7 @@ Page {
         opacity: 0
         color:  "orange"
         font.pixelSize: 42
-        text: "Refreshing..."
+        text: qsTr("Refreshing")+"..."
         anchors.centerIn: parent
     }
 

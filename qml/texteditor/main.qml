@@ -9,6 +9,10 @@ PageStackWindow {
     // UI constants
     property int defaultMargin : AppDefaults.DEFAULT_MARGIN
     property bool orientationIsPortrait
+    property string aboutInfo: qsTr("A simple text editor for the Nokia N9.")+"\n\n"+
+                               AppDefaults.HOMEPAGE+"\n"+
+                               qsTr("License")+": GPL3\n"+
+                               qsTr("Contact")+": <n9dyfi@gmail.com>\n";
 
     // Select the color scheme before instantiating any QML elements
     // that need the color...
@@ -85,15 +89,17 @@ PageStackWindow {
         Qt.quit()
     }
 
+    // Menu>Cancel was selected in the BrowsePage
     onBrowseCancelled: {
         pageStack.pop()
     }
 
     // Menu>Quit was selected but editor contents were not saved.
     onAppCloseToBeConfirmed: {
-        appCloseConfirmDialog.titleText = fileName+" changed."
+        //appCloseConfirmDialog.titleText = fileName+" "+qsTr("changed.")
+        appCloseConfirmDialog.titleText = qsTr("%1 changed.").arg(fileName)
         appCloseConfirmDialog.open();
-    }
+    }    
 
     // TextEditor requested BrowsePage to be opened for selecting a file.
     onBrowseRequested: {
@@ -102,32 +108,35 @@ PageStackWindow {
 
     // TextEditor could not open a file for reading.
     onOpenFailed: {
-        openFailedDialog.titleText = "Cannot open "+fileName+"."
+        openFailedDialog.titleText = qsTr("Cannot open %1.").arg(fileName)
         openFailedDialog.message = errorString;
         openFailedDialog.open();
     }
 
     // TextEditor could not save the file.
     onSaveFailed: {
-        saveFailedDialog.titleText = "Cannot save "+fileName+"."
+        saveFailedDialog.titleText = qsTr("Cannot save %1.").arg(fileName)
         saveFailedDialog.message = errorString;
         saveFailedDialog.open();
     }
 
     // TextEditor successfully saved the editor contents to the selected file.
+    // Go back to EditPage and flash "Saving...".
     onSaveAsCompleted: {
         editPage.currentFolder = currentFolder;
         editPage.currentFile = currentFile;
         pageStack.pop();
-        editPage.save = true
+        editPage.showSave = true
         // Was this the save as before close?
         if(appIsClosing) {
             appToBeClosed()
         }
     }
 
+    // TextEditor successfully saved the editor contents to the current file.
+    // Stay in EditPage and flash "Saving...".
     onSaveCompleted: {
-        editPage.save = true
+        editPage.showSave = true
         // Was this the save before close?
         if(appIsClosing) {
             appToBeClosed()
@@ -144,19 +153,19 @@ PageStackWindow {
 
     // TextEditor will ask before overwriting an existing file.
     onSaveAsToBeConfirmed: {
-        saveConfirmDialog.titleText = fileName+" already exists.";
+        saveConfirmDialog.titleText = qsTr("%1 already exists.").arg(fileName)
         saveConfirmDialog.open();
     }
 
     // TextEditor will ask before opening a new file when editor contents changed.
     onOpenToBeConfirmed: {
-        openConfirmDialog.titleText = fileName+" changed."
+        openConfirmDialog.titleText = qsTr("%1 changed.").arg(fileName)
         openConfirmDialog.open();
     }
 
     // TextEditor will ask before starting a new file when editor contents changed.
     onNewToBeConfirmed: {
-        newConfirmDialog.titleText = fileName+" changed."
+        newConfirmDialog.titleText = qsTr("%1 changed.").arg(fileName)
         newConfirmDialog.open();
     }
 
@@ -166,9 +175,9 @@ PageStackWindow {
     QueryDialog {
         id: aboutDialog
         titleText: "TextEditor "+AppDefaults.VERSION
-        message: AppDefaults.ABOUT_INFO
-        acceptButtonText: "Go to homepage"
-        rejectButtonText: "Close"
+        message: aboutInfo
+        acceptButtonText: qsTr("Go to homepage")
+        rejectButtonText: qsTr("Close")
         onAccepted: {
             Qt.openUrlExternally(AppDefaults.HOMEPAGE)
         }
@@ -177,21 +186,21 @@ PageStackWindow {
     // File open error
     QueryDialog {
         id: openFailedDialog
-        acceptButtonText: "OK"
+        acceptButtonText: qsTr("OK")
     }
 
     // File save error
     QueryDialog {
         id: saveFailedDialog
-        acceptButtonText: "OK"
+        acceptButtonText: qsTr("OK")
     }
 
     // Overwrite confirmation
     QueryDialog {
         id: saveConfirmDialog
-        message: "Do you want to replace it?"
-        acceptButtonText: "Yes"
-        rejectButtonText: "No"
+        message: qsTr("Do you want to replace it?")
+        acceptButtonText: qsTr("Yes")
+        rejectButtonText: qsTr("No")
         onAccepted: {
             saveAsConfirmed(editPage.content)
         }
@@ -200,9 +209,9 @@ PageStackWindow {
     // Overwrite editor contents confirmation
     QueryDialog {
         id: appCloseConfirmDialog
-        message: "Save before exiting?"
-        acceptButtonText: "Yes"
-        rejectButtonText: "No"
+        message: qsTr("Save before exiting?")
+        acceptButtonText: qsTr("Yes")
+        rejectButtonText: qsTr("No")
         onAccepted: {
             appIsClosing = true
             saveBeforeClosed(editPage.content)
@@ -215,9 +224,9 @@ PageStackWindow {
     // Overwrite editor contents confirmation
     QueryDialog {
         id: openConfirmDialog
-        message: "Discard changes?"
-        acceptButtonText: "Yes"
-        rejectButtonText: "No"
+        message: qsTr("Discard changes?")
+        acceptButtonText: qsTr("Yes")
+        rejectButtonText: qsTr("No")
         onAccepted: {
             openConfirmed()
         }
@@ -226,12 +235,11 @@ PageStackWindow {
     // Overwrite editor contents confirmation
     QueryDialog {
         id: newConfirmDialog
-        message: "Discard changes?"
-        acceptButtonText: "Yes"
-        rejectButtonText: "No"
+        message: qsTr("Discard changes?")
+        acceptButtonText: qsTr("Yes")
+        rejectButtonText: qsTr("No")
         onAccepted: {
             newConfirmed()
         }
     }
-
 }

@@ -48,3 +48,6 @@ OTHER_FILES += \
 
 HEADERS += \
     texteditor.h
+
+RESOURCES += \
+    translations.qrc

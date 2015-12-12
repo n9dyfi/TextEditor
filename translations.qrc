@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="tr_en">qml/texteditor/i18n/tr_en.qm</file>
+        <file alias="tr_fi">qml/texteditor/i18n/tr_fi.qm</file>
+        <file alias="tr_ru">qml/texteditor/i18n/tr_ru.qm</file>
+    </qresource>
+</RCC>

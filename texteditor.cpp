@@ -1,6 +1,6 @@
 #include "texteditor.h"
 
-const QString TextEditor::DEFAULT_FILE = QString("Untitled");
+const QString TextEditor::DEFAULT_FILE = QObject::tr("Untitled");
 
 TextEditor::TextEditor(QObject *qml, QObject *parent) :
       QObject(parent)
@@ -94,7 +94,7 @@ void TextEditor::menuSaveClicked(QString content)
         return;
     }
     currentContent = content;
-    saveCurrentContent();
+    saveCurrentContent(SAVE);
 }
 
 // QML menu: Save As was clicked
@@ -108,8 +108,7 @@ void TextEditor::menuSaveAsClicked()
 void TextEditor::saveAsConfirmed(QString content)
 {
     currentContent = content;
-    saveCurrentContent();
-    emit saveAsCompleted(currentFolder,currentFile);
+    saveCurrentContent(SAVE_AS);
 }
 
 // Discard current content was confirmed during Menu>Open.
@@ -150,11 +149,11 @@ void TextEditor::saveBeforeClosed(QString content)
         return;
     }
     currentContent = content;
-    saveCurrentContent();
+    saveCurrentContent(SAVE);
 }
 
 // Save the current editor content to the current folder/file.
-void TextEditor::saveCurrentContent()
+void TextEditor::saveCurrentContent(int saveMode)
 {
     bool fileIsWritable;
 
@@ -169,7 +168,10 @@ void TextEditor::saveCurrentContent()
         QTextStream stream( &file );
         stream<<currentContent;
         file.close();
-        emit saveCompleted(currentFolder,currentFile);
+        if(saveMode==SAVE)
+            emit saveCompleted(currentFolder,currentFile);
+        else
+            emit saveAsCompleted(currentFolder,currentFile);
     } else {
         emit saveFailed(currentFile,file.errorString());
     }
@@ -188,8 +190,7 @@ void TextEditor::saveAsRequested(QString content, QString fileName)
         emit saveAsToBeConfirmed(currentFile);
     } else {
         currentContent = content;
-        saveCurrentContent();
-        emit saveAsCompleted(currentFolder,currentFile);
+        saveCurrentContent(SAVE_AS);
     }
 }
 

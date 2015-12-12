@@ -39,6 +39,5 @@ Menu {
                 appCloseRequested(editPage.content);
             }
         }
-
     }
 }
