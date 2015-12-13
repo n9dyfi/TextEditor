@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="fi_FI">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.0">
 <context>
     <name>BrowseMenu</name>
     <message>
@@ -74,6 +72,14 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../../texteditor.cpp" line="3"/>
+        <source>Untitled</source>
+        <translation>Nimetön</translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <location filename="../main.qml" line="12"/>
@@ -105,7 +111,7 @@
     <message>
         <location filename="../main.qml" line="118"/>
         <source>Cannot save %1.</source>
-        <translation>Tallennus tiedostoon %1 epäonnistui.</translation>
+        <translation>Tiedoston %1 tallennus epäonnistui.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="156"/>
@@ -139,7 +145,7 @@
         <location filename="../main.qml" line="228"/>
         <location filename="../main.qml" line="239"/>
         <source>Yes</source>
-        <translation>Kyllä</translation>
+        <translation>Kyllä.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="203"/>
