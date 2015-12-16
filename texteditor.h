@@ -15,7 +15,7 @@ public:
     explicit TextEditor(QObject *qml, QObject *parent = 0);
 
 private:
-    static const QString DEFAULT_FILE;
+    static const char *UNTITLED;    // default file name for File>New
 
     QString currentFolder;
     QString currentFile;
@@ -42,7 +42,7 @@ signals:
     void browseRequested(QString currentFolder, bool saveRequested);
     void openCompleted(QString content, QString currentFolder, QString currentFile);
     void openFailed(QString fileName, QString errorString);
-    void saveCompleted(QString currentFolder, QString currentFile);
+    void saveCompleted();
     void saveFailed(QString fileName, QString errorString);
     void saveAsCompleted(QString currentFolder, QString currentFile);
     void saveAsToBeConfirmed(QString fileName);

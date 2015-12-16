@@ -72,9 +72,9 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
+    <name>TextEditor</name>
     <message>
-        <location filename="../../../texteditor.cpp" line="3"/>
+        <location filename="../../../texteditor.cpp" line="4"/>
         <source>Untitled</source>
         <translation>Nimetön</translation>
     </message>

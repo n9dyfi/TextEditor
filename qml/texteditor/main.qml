@@ -44,7 +44,7 @@ PageStackWindow {
     signal browseRequested(string currentFolder, bool saveRequested)
     signal openCompleted(string content,string currentFolder, string currentFile)
     signal openFailed(string fileName, string errorString)
-    signal saveCompleted(string currentFolder, string currentFile)
+    signal saveCompleted
     signal saveFailed(string fileName, string errorString)
     signal saveAsCompleted(string currentFolder, string currentFile)
     signal saveAsToBeConfirmed(string fileName)

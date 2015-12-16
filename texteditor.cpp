@@ -1,12 +1,13 @@
 #include "texteditor.h"
 
-const QString TextEditor::DEFAULT_FILE = QObject::tr("Untitled");
+// QT_TRANSLATE_NOOP is required to translate static const strings outside any context
+const char *TextEditor::UNTITLED = QT_TRANSLATE_NOOP("TextEditor","Untitled");
 
 TextEditor::TextEditor(QObject *qml, QObject *parent) :
       QObject(parent)
 {
     currentFolder = "file:///home/user";
-    currentFile = DEFAULT_FILE;
+    currentFile = tr(UNTITLED);
     currentContent = "";
 
     // connect QML signals to TextEditor slots
@@ -42,8 +43,8 @@ TextEditor::TextEditor(QObject *qml, QObject *parent) :
                qml, SLOT(openCompleted(QString,QString,QString)));
     connect(this, SIGNAL(openFailed(QString,QString)),
                qml, SLOT(openFailed(QString,QString)));
-    connect(this, SIGNAL(saveCompleted(QString,QString)),
-               qml, SLOT(saveCompleted(QString,QString)));
+    connect(this, SIGNAL(saveCompleted()),
+               qml, SLOT(saveCompleted()));
     connect(this, SIGNAL(saveFailed(QString,QString)),
                qml, SLOT(saveFailed(QString,QString)));
     connect(this, SIGNAL(saveAsCompleted(QString,QString)),
@@ -88,7 +89,7 @@ void TextEditor::fileNewRequested(QString content)
 // QML menu: Save was clicked
 void TextEditor::menuSaveClicked(QString content)
 {
-    if(currentFile==DEFAULT_FILE)
+    if(currentFile==tr(UNTITLED))
     {
         menuSaveAsClicked();
         return;
@@ -121,7 +122,7 @@ void TextEditor::openConfirmed()
 // Discard current content was confirmed during Menu>New.
 void TextEditor::newConfirmed()
 {
-    currentFile = DEFAULT_FILE;
+    currentFile = tr(UNTITLED);
     currentContent = "";
     emit editorCleared(currentFolder,currentFile);
 }
@@ -143,7 +144,7 @@ void TextEditor::appCloseRequested(QString content)
 void TextEditor::saveBeforeClosed(QString content)
 {
     // Did we have a valid file name?
-    if(currentFile==DEFAULT_FILE)
+    if(currentFile==tr(UNTITLED))
     {
         menuSaveAsClicked();
         return;
@@ -169,7 +170,7 @@ void TextEditor::saveCurrentContent(int saveMode)
         stream<<currentContent;
         file.close();
         if(saveMode==SAVE)
-            emit saveCompleted(currentFolder,currentFile);
+            emit saveCompleted();
         else
             emit saveAsCompleted(currentFolder,currentFile);
     } else {
