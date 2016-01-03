@@ -4,6 +4,9 @@
 #include <QDeclarativeItem>
 #include <QFile>
 
+#define SAVE 0
+#define SAVE_AS 1
+
 class TextEditor : public QObject
 {
     Q_OBJECT
@@ -12,14 +15,14 @@ public:
     explicit TextEditor(QObject *qml, QObject *parent = 0);
 
 private:
-    static const QString DEFAULT_FILE;
+    static const char *UNTITLED;    // default file name for File>New
 
     QString currentFolder;
     QString currentFile;
     QString currentContent;
 
 private slots:
-    void saveCurrentContent();
+    void saveCurrentContent(int);
 
 public slots:
     void menuOpenClicked(QString);
@@ -39,7 +42,7 @@ signals:
     void browseRequested(QString currentFolder, bool saveRequested);
     void openCompleted(QString content, QString currentFolder, QString currentFile);
     void openFailed(QString fileName, QString errorString);
-    void saveCompleted(QString currentFolder, QString currentFile);
+    void saveCompleted();
     void saveFailed(QString fileName, QString errorString);
     void saveAsCompleted(QString currentFolder, QString currentFile);
     void saveAsToBeConfirmed(QString fileName);

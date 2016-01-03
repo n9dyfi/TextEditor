@@ -8,8 +8,9 @@ Page {
     property alias content: textArea.text
     property string currentFolder: ""
     property string currentFile: ""
-    property bool save: false
+    property bool showSave: false
     property alias textAreaHeight: textArea.height
+    property string placeHolder: qsTr("Click here to start typing.")
 
     tools: commonTools
 
@@ -38,7 +39,7 @@ Page {
         TextArea {
             id: textArea
             width: editPage.width
-            placeholderText: AppDefaults.PLACE_HOLDER_TEXT
+            placeholderText: placeHolder
             smooth: true
             wrapMode: TextEdit.Wrap
             textFormat: TextEdit.PlainText
@@ -46,11 +47,11 @@ Page {
         }
     }
 
-    // Called twice: 1) save=true 2) save=false
+    // Called twice: 1) showSave=true 2) showSave=false
     // Change state from "saving" to "saved"
-    onSaveChanged: {
-        state = (save)?"saving":"saved"
-        save = false
+    onShowSaveChanged: {
+        state = (showSave)?"saving":"saved"
+        showSave = false
     }
 
     state: "saved"

@@ -9,6 +9,10 @@ PageStackWindow {
     // UI constants
     property int defaultMargin : AppDefaults.DEFAULT_MARGIN
     property bool orientationIsPortrait
+    property string aboutInfo: qsTr("A simple text editor for the Nokia N9.")+"\n\n"+
+                               AppDefaults.HOMEPAGE+"\n"+
+                               qsTr("License")+": GPL3\n"+
+                               qsTr("Contact")+": <n9dyfi@gmail.com>\n";
 
     // Select the color scheme before instantiating any QML elements
     // that need the color...
@@ -40,7 +44,7 @@ PageStackWindow {
     signal browseRequested(string currentFolder, bool saveRequested)
     signal openCompleted(string content,string currentFolder, string currentFile)
     signal openFailed(string fileName, string errorString)
-    signal saveCompleted(string currentFolder, string currentFile)
+    signal saveCompleted
     signal saveFailed(string fileName, string errorString)
     signal saveAsCompleted(string currentFolder, string currentFile)
     signal saveAsToBeConfirmed(string fileName)
@@ -85,6 +89,7 @@ PageStackWindow {
         Qt.quit()
     }
 
+    // Menu>Cancel was selected in the BrowsePage
     onBrowseCancelled: {
         pageStack.pop()
     }
@@ -115,19 +120,22 @@ PageStackWindow {
     }
 
     // TextEditor successfully saved the editor contents to the selected file.
+    // Go back to EditPage and flash "Saving...".
     onSaveAsCompleted: {
         editPage.currentFolder = currentFolder;
         editPage.currentFile = currentFile;
         pageStack.pop();
-        editPage.save = true
+        editPage.showSave = true
         // Was this the save as before close?
         if(appIsClosing) {
             appToBeClosed()
         }
     }
 
+    // TextEditor successfully saved the editor contents to the current file.
+    // Stay in EditPage and flash "Saving...".
     onSaveCompleted: {
-        editPage.save = true
+        editPage.showSave = true
         // Was this the save before close?
         if(appIsClosing) {
             appToBeClosed()
@@ -166,7 +174,7 @@ PageStackWindow {
     QueryDialog {
         id: aboutDialog
         titleText: "TextEditor "+AppDefaults.VERSION
-        message: AppDefaults.ABOUT_INFO
+        message: aboutInfo
         acceptButtonText: "Go to homepage"
         rejectButtonText: "Close"
         onAccepted: {
@@ -233,5 +241,4 @@ PageStackWindow {
             newConfirmed()
         }
     }
-
 }

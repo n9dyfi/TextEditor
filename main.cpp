@@ -12,7 +12,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QmlApplicationViewer viewer;
 
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    viewer.setMainQmlFile(QLatin1String("qml/texteditor/main.qml"));
+    viewer.setMainQmlFile("qml/texteditor/main.qml");
     viewer.showExpanded();
 
     // get the QML root object for signal-slot connections

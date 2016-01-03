@@ -5,8 +5,6 @@ var FILE_BG_COLOR_PRESSED = "steelblue";
 
 var VERSION = "1.0" ;
 var HOMEPAGE = "http://n9dyfi.github.io/TextEditor"
-var ABOUT_INFO = "A simple text editor for the Nokia N9.\n\n"+HOMEPAGE+"\nLicense: GPL3\nContact: <n9dyfi@gmail.com>\n";
-var PLACE_HOLDER_TEXT = "Click here to start typing.";
 var COLOR_SCHEME = 18;
 var DEFAULT_MARGIN = 16;
 
