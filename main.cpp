@@ -1,5 +1,4 @@
 #include <QtGui/QApplication>
-#include <QtDeclarative/QDeclarativeContext>
 #include <QDeclarativeItem>
 #include "qmlapplicationviewer.h"
 #include "texteditor.h"
@@ -7,7 +6,6 @@
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QScopedPointer<QApplication> app(createApplication(argc, argv));
-    TextEditor *texteditor;
 
     QmlApplicationViewer viewer;
 
@@ -15,10 +13,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     viewer.setMainQmlFile("qml/texteditor/main.qml");
     viewer.showExpanded();
 
-    // get the QML root object for signal-slot connections
+    // Get the QML root object for signal-slot connections.
     QObject *qml = viewer.rootObject();
 
-    texteditor = new TextEditor(qml);
+    // Create the text editor back-end processor and pass in the root object.
+    // Make viewer the parent object (takes care of deleting the text editor).
+    new TextEditor(qml,&viewer);
 
     return app->exec();
 }
