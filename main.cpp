@@ -16,8 +16,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Get the QML root object for signal-slot connections.
     QObject *qml = viewer.rootObject();
 
-    // Create the text editor back-end processor and pass in the root object.
-    // Make viewer the parent object (takes care of deleting the text editor).
+    // Create the back-end processor and pass in the root object.
+    // Make viewer the parent object.
     new TextEditor(qml,&viewer);
 
     return app->exec();

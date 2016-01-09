@@ -9,10 +9,10 @@ PageStackWindow {
     // UI constants
     property int defaultMargin : AppDefaults.DEFAULT_MARGIN
     property bool orientationIsPortrait
-    property string aboutInfo: qsTr("A simple text editor for the Nokia N9.")+"\n\n"+
+    property string aboutInfo: "A simple text editor for the Nokia N9.\n\n"+
                                AppDefaults.HOMEPAGE+"\n"+
-                               qsTr("License")+": GPL3\n"+
-                               qsTr("Contact")+": <n9dyfi@gmail.com>\n";
+                               "License: GPL3\n"+
+                               "Contact: <n9dyfi@gmail.com>\n";
 
     // Select the color scheme before instantiating any QML elements
     // that need the color...
@@ -53,6 +53,8 @@ PageStackWindow {
     signal appCloseToBeConfirmed(string fileName)
     signal appToBeClosed
     signal editorCleared(string folderPath,string fileName)
+
+    // QML element instantiations
 
     // Instantiate the EditPage component (defined in EditPage.qml)
     initialPage: editPage
@@ -205,7 +207,7 @@ PageStackWindow {
         }
     }
 
-    // Overwrite editor contents confirmation
+    // Save editor contents confirmation
     QueryDialog {
         id: appCloseConfirmDialog
         message: "Save before exiting?"
@@ -220,7 +222,7 @@ PageStackWindow {
         }
     }
 
-    // Overwrite editor contents confirmation
+    // Discard changes confirmation when Open is selected
     QueryDialog {
         id: openConfirmDialog
         message: "Discard changes?"
@@ -231,7 +233,7 @@ PageStackWindow {
         }
     }
 
-    // Overwrite editor contents confirmation
+    // Discard changes confirmation when New is selected
     QueryDialog {
         id: newConfirmDialog
         message: "Discard changes?"

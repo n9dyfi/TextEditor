@@ -74,7 +74,7 @@ void TextEditor::menuOpenClicked(QString content)
     emit browseRequested(currentFolder, saveRequested);
 }
 
-// QML Toolbar>New clicked
+// QML menu: New was clicked
 void TextEditor::fileNewRequested(QString content)
 {
     if(content!=currentContent)
@@ -85,7 +85,7 @@ void TextEditor::fileNewRequested(QString content)
     newConfirmed();
 }
 
-// QML menu: Save was clicked
+// QML toolbar: Save was clicked
 void TextEditor::menuSaveClicked(QString content)
 {
     if(currentFile==UNTITLED)
@@ -126,7 +126,7 @@ void TextEditor::newConfirmed()
     emit editorCleared(currentFolder,currentFile);
 }
 
-// Menu>Quit was selected.
+// QML menu: Quit was clicked.
 void TextEditor::appCloseRequested(QString content)
 {
     // Check if the content was changed.

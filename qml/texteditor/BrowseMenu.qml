@@ -4,7 +4,7 @@ import com.nokia.meego 1.0
 Menu {
     MenuLayout {
         MenuItem {
-            text: qsTr("Cancel")
+            text: "Cancel"
             onClicked: browseCancelled()
         }
     }

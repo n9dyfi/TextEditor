@@ -6,37 +6,37 @@ Menu {
     MenuLayout {
 
         MenuItem {
-            text: qsTr("New")
+            text: "New"
             onClicked: {
                 fileNewRequested(editPage.content)
             }
         }
 
         MenuItem {
-            text: qsTr("Open")
+            text: "Open"
             onClicked: {
                 menuOpenClicked(editPage.content)
             }
         }
 
         MenuItem {
-            text: qsTr("Save As")
+            text: "Save As"
             onClicked: {
                 menuSaveAsClicked()
             }
         }
 
         MenuItem {
-            text: qsTr("About")
+            text: "About"
             onClicked: {
-                aboutDialog.open();
+                aboutDialog.open()
             }
         }
 
         MenuItem {
-            text: qsTr("Quit")
+            text: "Quit"
             onClicked: {
-                appCloseRequested(editPage.content);
+                appCloseRequested(editPage.content)
             }
         }
     }

@@ -21,7 +21,7 @@ Item {
     property int infoTopFontSize: AppDefaults.FONT_SIZE_SMALL
     property int infoBottomFontSize: AppDefaults.FONT_SIZE_TINY
 
-    // header dimensions
+    // Header dimensions
     height: (inPortrait)?AppDefaults.HEADER_DEFAULT_HEIGHT_PORTRAIT:
                           AppDefaults.HEADER_DEFAULT_HEIGHT_LANDSCAPE
     width: parent.width
@@ -78,7 +78,6 @@ Item {
         platformStyle: infoBottomStyle
         visible: !singleLineHeader
         anchors {
-            //top:infoTop.bottom;
             bottom:parent.bottom; bottomMargin:infoBottomSpacing;
             left:parent.left; leftMargin:defaultMargin
         }
