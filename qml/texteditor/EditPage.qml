@@ -10,7 +10,7 @@ Page {
     property string currentFile: ""
     property bool showSave: false
     property alias textAreaHeight: textArea.height
-    property string placeHolder: qsTr("Click here to start typing.")
+    property string placeHolder: "Click here to start typing."
 
     tools: commonTools
 
