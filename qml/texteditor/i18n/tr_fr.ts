@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="hu" version="2.0">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.0">
 <context>
     <name>BrowseMenu</name>
     <message>
         <location filename="../BrowseMenu.qml" line="7"/>
         <source>Cancel</source>
-        <translation>Mégse</translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -12,22 +12,22 @@
     <message>
         <location filename="../BrowsePage.qml" line="56"/>
         <source>Save as</source>
-        <translation>Mentés másként</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <location filename="../BrowsePage.qml" line="56"/>
         <source>Open</source>
-        <translation>Megnyitás</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <location filename="../BrowsePage.qml" line="66"/>
         <source>Save</source>
-        <translation>Mentés</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location filename="../BrowsePage.qml" line="134"/>
         <source>Refreshing</source>
-        <translation>Frissítés</translation>
+        <translation>Rafraîchissement</translation>
     </message>
 </context>
 <context>
@@ -35,17 +35,17 @@
     <message>
         <location filename="../DialogAbout.qml" line="11"/>
         <source>A simple text editor for the Nokia N9.</source>
-        <translation>Egyszerű szövegszerkesztő Nokia N9-re.</translation>
+        <translation>Un simple éditeur de texte pour le Nokia N9.</translation>
     </message>
     <message>
         <location filename="../DialogAbout.qml" line="13"/>
         <source>License</source>
-        <translation>Licenc</translation>
+        <translation>Licence</translation>
     </message>
     <message>
         <location filename="../DialogAbout.qml" line="14"/>
         <source>Contact</source>
-        <translation>Kapcsolat</translation>
+        <translation>Les coordonnées</translation>
     </message>
 </context>
 <context>
@@ -53,17 +53,17 @@
     <message>
         <location filename="../DialogConfirmNew.qml" line="10"/>
         <source>Discard changes?</source>
-        <translation>Elveted a módosításokat?</translation>
+        <translation>Annuler les modifications?</translation>
     </message>
     <message>
         <location filename="../DialogConfirmNew.qml" line="11"/>
         <source>Yes</source>
-        <translation>Igen</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../DialogConfirmNew.qml" line="12"/>
         <source>No</source>
-        <translation>Nem</translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -71,17 +71,17 @@
     <message>
         <location filename="../DialogConfirmNewOrOpen.qml" line="14"/>
         <source>Discard changes?</source>
-        <translation>Elveted a módosításokat?</translation>
+        <translation>Annuler les modifications</translation>
     </message>
     <message>
         <location filename="../DialogConfirmNewOrOpen.qml" line="15"/>
         <source>Yes</source>
-        <translation>Igen</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../DialogConfirmNewOrOpen.qml" line="16"/>
         <source>No</source>
-        <translation>Nem</translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -89,17 +89,17 @@
     <message>
         <location filename="../DialogConfirmOpen.qml" line="10"/>
         <source>Discard changes?</source>
-        <translation>Elveted a módosításokat?</translation>
+        <translation>Annuler les modifications</translation>
     </message>
     <message>
         <location filename="../DialogConfirmOpen.qml" line="11"/>
         <source>Yes</source>
-        <translation>Igen</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../DialogConfirmOpen.qml" line="12"/>
         <source>No</source>
-        <translation>Nem</translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -107,17 +107,17 @@
     <message>
         <location filename="../DialogConfirmQuit.qml" line="11"/>
         <source>Save before exiting?</source>
-        <translation>Mented a módosításokat?</translation>
+        <translation>Enregistrer avant de quitter?</translation>
     </message>
     <message>
         <location filename="../DialogConfirmQuit.qml" line="12"/>
         <source>Yes</source>
-        <translation>Igen</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../DialogConfirmQuit.qml" line="13"/>
         <source>No</source>
-        <translation>Nem</translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -125,17 +125,17 @@
     <message>
         <location filename="../DialogConfirmSave.qml" line="10"/>
         <source>Do you want to replace it?</source>
-        <translation>Felülírod?</translation>
+        <translation>Voulez-vous le remplacer?</translation>
     </message>
     <message>
         <location filename="../DialogConfirmSave.qml" line="11"/>
         <source>Yes</source>
-        <translation>Igen</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../DialogConfirmSave.qml" line="12"/>
         <source>No</source>
-        <translation>Nem</translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../DialogFileError.qml" line="11"/>
         <source>OK</source>
-        <translation>Rendben</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -151,27 +151,27 @@
     <message>
         <location filename="../EditMenu.qml" line="9"/>
         <source>New</source>
-        <translation>Új</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <location filename="../EditMenu.qml" line="16"/>
         <source>Open</source>
-        <translation>Megnyitás</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <location filename="../EditMenu.qml" line="23"/>
         <source>Save As</source>
-        <translation>Mentés másként</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <location filename="../EditMenu.qml" line="30"/>
         <source>About</source>
-        <translation>Névjegy</translation>
+        <translation>A propos</translation>
     </message>
     <message>
         <location filename="../EditMenu.qml" line="37"/>
         <source>Quit</source>
-        <translation>Kilépés</translation>
+        <translation>Quitter</translation>
     </message>
 </context>
 <context>
@@ -179,12 +179,12 @@
     <message>
         <location filename="../EditPage.qml" line="13"/>
         <source>Click here to start typing.</source>
-        <translation>Érintsd meg itt a kijelzőt a kezdéshez!</translation>
+        <translation>Cliquez ici et vous pouvez taper votre texte.</translation>
     </message>
     <message>
         <location filename="../EditPage.qml" line="80"/>
         <source>Saving</source>
-        <translation>Mentés</translation>
+        <translation>Enregistrement</translation>
     </message>
 </context>
 <context>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../RecentPage.qml" line="30"/>
         <source>Recent Files</source>
-        <translation type="unfinished"/>
+        <translation>Fichiers récents</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../../../texteditor.cpp" line="6"/>
         <source>Untitled</source>
-        <translation>Névtelen</translation>
+        <translation>Sans titre</translation>
     </message>
 </context>
 <context>
@@ -209,22 +209,22 @@
         <location filename="../main.qml" line="142"/>
         <location filename="../main.qml" line="173"/>
         <source>%1 changed.</source>
-        <translation>%1 módosítva lett.</translation>
+        <translation>Le fichier %1 a été modifié.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="149"/>
         <source>Cannot open %1.</source>
-        <translation>%1 megnyitása sikertelen!</translation>
+        <translation>Ne peut pas ouvrir le fichier %1.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="157"/>
         <source>Cannot save %1.</source>
-        <translation>%1 mentése sikertelen!</translation>
+        <translation>Ne peut pas enregistrer le fichier %1.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="165"/>
         <source>%1 already exists.</source>
-        <translation>%1 már létezik.</translation>
+        <translation>Le fichier %1 existe déjà.</translation>
     </message>
 </context>
 </TS>

@@ -8,7 +8,7 @@ Menu {
         MenuItem {
             text: qsTr("New")
             onClicked: {
-                fileNewRequested(editPage.content)
+                menuNewClicked(editPage.content)
             }
         }
 
@@ -29,14 +29,14 @@ Menu {
         MenuItem {
             text: qsTr("About")
             onClicked: {
-                aboutDialog.open();
+                menuAboutClicked();
             }
         }
 
         MenuItem {
             text: qsTr("Quit")
             onClicked: {
-                appCloseRequested(editPage.content);
+                menuQuitClicked(editPage.content);
             }
         }
     }

@@ -19,6 +19,11 @@ Page {
         id: commonTools
     }
 
+    // Instantiate the EditMenu component (defined in EditMenu.qml)
+    EditMenu {
+        id: editMenu
+    }
+
     Header {
         id: header
         headerText: "TextEditor"
@@ -95,5 +100,10 @@ Page {
             }
         }
     ]
+
+//    Component.onDestruction: {
+//        console.debug("EditPage: onDestruction")
+//        menuQuitClicked(editPage.content);
+//    }
 
 }

@@ -1,44 +1,53 @@
 #include "texteditor.h"
+#include "recentfiles.h"
+#include <QDebug>
 
 // QT_TRANSLATE_NOOP is required to translate static const strings outside any context
 const char *TextEditor::UNTITLED = QT_TRANSLATE_NOOP("TextEditor","Untitled");
 
-TextEditor::TextEditor(QObject *qml, QObject *parent) :
-      QObject(parent)
+TextEditor::TextEditor(QObject *qml, RecentFiles *recentfiles, QObject *parent) :
+    QObject(parent)
 {
+
     currentFolder = "file:///home/user";
+    newFolder = currentFolder;
+    //currentFolder = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+    //qDebug() << currentFolder;
     currentFile = tr(UNTITLED);
     currentContent = "";
+    recentFiles = recentfiles;
 
     // connect QML signals to TextEditor slots
     connect(qml, SIGNAL(menuOpenClicked(QString)),
              this, SLOT(menuOpenClicked(QString)));
-    connect(qml, SIGNAL(menuSaveClicked(QString)),
-             this, SLOT(menuSaveClicked(QString)));
+    connect(qml, SIGNAL(toolSaveClicked(QString)),
+             this, SLOT(toolSaveClicked(QString)));
+    connect(qml, SIGNAL(toolRecentClicked(QString)),
+             this, SLOT(toolRecentClicked(QString)));
     connect(qml, SIGNAL(menuSaveAsClicked()),
              this, SLOT(menuSaveAsClicked()));
     connect(qml, SIGNAL(saveAsRequested(QString,QString)),
              this, SLOT(saveAsRequested(QString,QString)));
-    connect(qml, SIGNAL(currentFolderChanged(QString)),
-             this, SLOT(currentFolderChanged(QString)));
+    connect(qml, SIGNAL(newFolderChanged(QString)),
+             this, SLOT(newFolderChanged(QString)));
     connect(qml, SIGNAL(fileOpenRequested(QString)),
              this, SLOT(fileOpenRequested(QString)));
     connect(qml, SIGNAL(saveAsConfirmed(QString)),
              this, SLOT(saveAsConfirmed(QString)));
-    connect(qml, SIGNAL(openConfirmed()),
-             this, SLOT(openConfirmed()));
-    connect(qml, SIGNAL(newConfirmed()),
-             this, SLOT(newConfirmed()));
-    connect(qml, SIGNAL(appCloseRequested(QString)),
-             this, SLOT(appCloseRequested(QString)));
+    connect(qml, SIGNAL(newOrOpenConfirmed(QString)),
+             this, SLOT(newOrOpenConfirmed(QString)));
+    connect(qml, SIGNAL(menuQuitClicked(QString)),
+             this, SLOT(menuQuitClicked(QString)));
     connect(qml, SIGNAL(saveBeforeClosed(QString)),
              this, SLOT(saveBeforeClosed(QString)));
-    connect(qml, SIGNAL(fileNewRequested(QString)),
-             this, SLOT(fileNewRequested(QString)));
+    connect(qml, SIGNAL(menuNewClicked(QString)),
+             this, SLOT(menuNewClicked(QString)));
 
     // connect TextEditor signals to QML signals
     connect(this, SIGNAL(browseRequested(QString,bool)),
                qml, SLOT(browseRequested(QString,bool)));
+    connect(this, SIGNAL(recentRequested()),
+               qml, SLOT(recentRequested()));
     connect(this, SIGNAL(openCompleted(QString,QString,QString)),
                qml, SLOT(openCompleted(QString,QString,QString)));
     connect(this, SIGNAL(openFailed(QString,QString)),
@@ -51,10 +60,8 @@ TextEditor::TextEditor(QObject *qml, QObject *parent) :
                qml, SLOT(saveAsCompleted(QString,QString)));
     connect(this, SIGNAL(saveAsToBeConfirmed(QString)),
                qml, SLOT(saveAsToBeConfirmed(QString)));
-    connect(this, SIGNAL(openToBeConfirmed(QString)),
-               qml, SLOT(openToBeConfirmed(QString)));
-    connect(this, SIGNAL(newToBeConfirmed(QString)),
-               qml, SLOT(newToBeConfirmed(QString)));
+    connect(this, SIGNAL(newOrOpenToBeConfirmed(QString,QString)),
+               qml, SLOT(newOrOpenToBeConfirmed(QString,QString)));
     connect(this, SIGNAL(appCloseToBeConfirmed(QString)),
                qml, SLOT(appCloseToBeConfirmed(QString)));
     connect(this, SIGNAL(appToBeClosed()),
@@ -68,7 +75,8 @@ void TextEditor::menuOpenClicked(QString content)
 {
     if(content!=currentContent)
     {
-        emit openToBeConfirmed(currentFile);
+        //emit openToBeConfirmed(currentFile);
+        emit newOrOpenToBeConfirmed("open",currentFile);
         return;
     }
     bool saveRequested = false;
@@ -76,18 +84,20 @@ void TextEditor::menuOpenClicked(QString content)
 }
 
 // QML Toolbar>New clicked
-void TextEditor::fileNewRequested(QString content)
+void TextEditor::menuNewClicked(QString content)
 {
     if(content!=currentContent)
     {
-        emit newToBeConfirmed(currentFile);
+        //emit newToBeConfirmed(currentFile);
+        emit newOrOpenToBeConfirmed("new",currentFile);
         return;
     }
-    newConfirmed();
+    //newConfirmed();
+    newOrOpenConfirmed("new");
 }
 
 // QML menu: Save was clicked
-void TextEditor::menuSaveClicked(QString content)
+void TextEditor::toolSaveClicked(QString content)
 {
     if(currentFile==tr(UNTITLED))
     {
@@ -95,7 +105,17 @@ void TextEditor::menuSaveClicked(QString content)
         return;
     }
     currentContent = content;
+    newFolder = currentFolder;
+    newFile = currentFile;
     saveCurrentContent(SAVE);
+}
+
+// EditPage toolbar: Recent Files was clicked
+void TextEditor::toolRecentClicked(QString content)
+{
+    bool statusOk = recentFiles->readRecentFiles();
+    if (statusOk)
+        emit recentRequested();
 }
 
 // QML menu: Save As was clicked
@@ -112,23 +132,21 @@ void TextEditor::saveAsConfirmed(QString content)
     saveCurrentContent(SAVE_AS);
 }
 
-// Discard current content was confirmed during Menu>Open.
-void TextEditor::openConfirmed()
+void TextEditor::newOrOpenConfirmed(QString op)
 {
-    bool saveRequested = false;
-    emit browseRequested(currentFolder, saveRequested);
-}
-
-// Discard current content was confirmed during Menu>New.
-void TextEditor::newConfirmed()
-{
-    currentFile = tr(UNTITLED);
-    currentContent = "";
-    emit editorCleared(currentFolder,currentFile);
+    if(op=="new")
+    {
+        currentFile = tr(UNTITLED);
+        currentContent = "";
+        emit editorCleared(currentFolder,currentFile);
+    } else if(op=="open") {
+        bool saveRequested = false;
+        emit browseRequested(currentFolder, saveRequested);
+    }
 }
 
 // Menu>Quit was selected.
-void TextEditor::appCloseRequested(QString content)
+void TextEditor::menuQuitClicked(QString content)
 {
     // Check if the content was changed.
     if(content!=currentContent)
@@ -150,6 +168,8 @@ void TextEditor::saveBeforeClosed(QString content)
         return;
     }
     currentContent = content;
+    newFolder = currentFolder;
+    newFile = currentFile;
     saveCurrentContent(SAVE);
 }
 
@@ -160,35 +180,42 @@ void TextEditor::saveCurrentContent(int saveMode)
 
     //qDebug() << "DBG> save"<<currentFile<<"to currentFolder:"<<currentFolder;
 
-    QUrl url(currentFolder+"/"+currentFile);
-    QString filename = url.toLocalFile();
-    QFile file(filename);
+    QUrl url(newFolder+"/"+newFile);
+    QString localFile = url.toLocalFile();
+    QFile file(localFile);
     fileIsWritable = file.open(QIODevice::WriteOnly | QIODevice::Text);
 
     if ( fileIsWritable ) {
         QTextStream stream( &file );
         stream<<currentContent;
         file.close();
+        currentFolder = newFolder;
+        currentFile = newFile;
         if(saveMode==SAVE)
             emit saveCompleted();
-        else
+        else {
+            recentFiles->readRecentFiles();
+            recentFiles->addFile(currentFolder+"|"+currentFile);
             emit saveAsCompleted(currentFolder,currentFile);
+        }
     } else {
-        emit saveFailed(currentFile,file.errorString());
+        emit saveFailed(newFile,file.errorString());
     }
 }
 
 // QML listView: file name was selected for saving
 void TextEditor::saveAsRequested(QString content, QString fileName)
 {
-    currentFile = fileName;
+    if (fileName.isEmpty())
+        return;
 
-    QUrl url(currentFolder+"/"+currentFile);
-    QString filename = url.toLocalFile();
-    QFile file(filename);
+    newFile = fileName;
+    QUrl url(newFolder+"/"+newFile);
+    QString localFile = url.toLocalFile();
+    QFile file(localFile);
     if(file.exists())
     {
-        emit saveAsToBeConfirmed(currentFile);
+        emit saveAsToBeConfirmed(fileName);
     } else {
         currentContent = content;
         saveCurrentContent(SAVE_AS);
@@ -196,9 +223,9 @@ void TextEditor::saveAsRequested(QString content, QString fileName)
 }
 
 // QML listView: folder was selected
-void TextEditor::currentFolderChanged(QString path)
+void TextEditor::newFolderChanged(QString path)
 {
-    currentFolder = path;
+    newFolder = path;
 }
 
 // QML listView: file name was selected for reading
@@ -208,7 +235,7 @@ void TextEditor::fileOpenRequested(QString fileName)
 
     //qDebug() << "DBG> open"<<fileName<<"from currentFolder:"<<currentFolder;
 
-    QUrl url(currentFolder+"/"+fileName);
+    QUrl url(newFolder+"/"+fileName);
     QString localFile = url.toLocalFile();
     QFile file(localFile);
     fileIsReadable = file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -217,10 +244,18 @@ void TextEditor::fileOpenRequested(QString fileName)
         QTextStream stream( &file );
         currentContent = stream.readAll();
         file.close();
-        // pass the content to the TextArea component
+        // update current folder and file name
+        currentFolder = newFolder;
         currentFile = fileName;
+        // update the recent files list
+        recentFiles->readRecentFiles();
+        recentFiles->addFile(currentFolder+"|"+currentFile);
+        // pass the content to the TextArea component
         emit openCompleted(currentContent,currentFolder,currentFile);
     } else {
+        // remove the entry from the recent files list (if it exists there)
+        // do not touch the current folder and file names
+        recentFiles->removeFile(newFolder+"|"+fileName);
         emit openFailed(fileName,file.errorString());
     }
 }

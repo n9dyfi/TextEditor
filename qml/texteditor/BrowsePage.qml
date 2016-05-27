@@ -17,16 +17,22 @@ Page {
 
     property bool refresh: false
 
+    // When folder is changed update newFolder and header/model data
     onFolderChanged: {
         header.infoBottomText = path
         folderModel.folder = path
-        currentFolderChanged(path)
+        newFolderChanged(path)
     }
 
     // Instantiate the BrowseTools component (defined in BrowseTools.qml)
     BrowseTools{
         id: browseTools
         visible: true
+    }
+
+    // Instantiate the BrowseMenu component (defined in BrowseMenu.qml)
+    BrowseMenu {
+        id: browseMenu
     }
 
     Column {
@@ -71,7 +77,7 @@ Page {
             width:parent.width;
             placeholderText: "File to save"
             Keys.onReturnPressed: {
-                saveAsRequested(editPage.content,saveasfile.text);
+                saveAsRequested(editPage.content,folderPath,saveasfile.text);
             }
         }
 

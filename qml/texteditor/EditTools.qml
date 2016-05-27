@@ -11,7 +11,15 @@ ToolBar {
             platformIconId: "toolbar-directory-move-to"
             anchors.left: (parent === undefined) ? undefined : parent.left
             onClicked: {
-                menuSaveClicked(editPage.content)
+                toolSaveClicked(editPage.content)
+            }
+        }
+        // Recent files button
+        ToolIcon {
+            platformIconId: "icon-m-toolbar-captured-dimmed-white"
+            anchors.left: (parent === undefined) ? undefined : parent.center
+            onClicked: {
+                toolRecentClicked(editPage.content)
             }
         }
         // Menu button

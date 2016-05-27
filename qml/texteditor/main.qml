@@ -9,10 +9,6 @@ PageStackWindow {
     // UI constants
     property int defaultMargin : AppDefaults.DEFAULT_MARGIN
     property bool orientationIsPortrait
-    property string aboutInfo: qsTr("A simple text editor for the Nokia N9.")+"\n\n"+
-                               AppDefaults.HOMEPAGE+"\n"+
-                               qsTr("License")+": GPL3\n"+
-                               qsTr("Contact")+": <n9dyfi@gmail.com>\n";
 
     // Select the color scheme before instantiating any QML elements
     // that need the color...
@@ -21,35 +17,36 @@ PageStackWindow {
     showStatusBar: false;
 
     property alias content: editPage.content
-    //property alias folderPath: browsePage.folderPath
-
     property bool appIsClosing: false
+
+     // These QML signals will be used in the QML side only
     signal browseCancelled
+    signal menuAboutClicked
 
     // These QML signals will be connected to the corresponding TextEditor slots
+    signal menuNewClicked(string content)
     signal menuOpenClicked(string content)
-    signal menuSaveClicked(string content)
     signal menuSaveAsClicked()
-    signal currentFolderChanged(string newFolder)
+    signal menuQuitClicked(string content)
+    signal toolSaveClicked(string content)
+    signal toolRecentClicked(string content)
+    signal newFolderChanged(string newFolder)
     signal saveAsRequested(string content, string fileName)
     signal fileOpenRequested(string fileName)
-    signal fileNewRequested(string content)
     signal saveAsConfirmed(string content)
-    signal openConfirmed
-    signal newConfirmed
-    signal appCloseRequested(string content)
+    signal newOrOpenConfirmed(string op)
     signal saveBeforeClosed(string content)
 
     // The corresponding TextEditor signals will be connected to these QML signals
     signal browseRequested(string currentFolder, bool saveRequested)
+    signal recentRequested()
     signal openCompleted(string content,string currentFolder, string currentFile)
     signal openFailed(string fileName, string errorString)
     signal saveCompleted
     signal saveFailed(string fileName, string errorString)
     signal saveAsCompleted(string currentFolder, string currentFile)
     signal saveAsToBeConfirmed(string fileName)
-    signal openToBeConfirmed(string fileName)
-    signal newToBeConfirmed(string fileName)
+    signal newOrOpenToBeConfirmed(string op, string fileName)
     signal appCloseToBeConfirmed(string fileName)
     signal appToBeClosed
     signal editorCleared(string folderPath,string fileName)
@@ -60,19 +57,9 @@ PageStackWindow {
         id: editPage
     }
 
-    // Instantiate the BrowsePage component (defined in BrowsePage.qml)
-    BrowsePage {
-        id: browsePage;
-    }
-
-    // Instantiate the EditMenu component (defined in EditMenu.qml)
-    EditMenu {
-        id: editMenu
-    }
-
-    // Instantiate the BrowseMenu component (defined in BrowseMenu.qml)
-    BrowseMenu {
-        id: browseMenu
+    // QML component loader
+    Loader {
+        id: myLoader
     }
 
     // Event handlers
@@ -94,30 +81,20 @@ PageStackWindow {
         pageStack.pop()
     }
 
-    // Menu>Quit was selected but editor contents were not saved.
-    onAppCloseToBeConfirmed: {
-        //appCloseConfirmDialog.titleText = fileName+" "+qsTr("changed.")
-        appCloseConfirmDialog.titleText = qsTr("%1 changed.").arg(fileName)
-        appCloseConfirmDialog.open();
-    }    
-
     // TextEditor requested BrowsePage to be opened for selecting a file.
     onBrowseRequested: {
-        pageStack.push(browsePage,{folderPath:currentFolder,saveAs:saveRequested});
+//        pageStack.push(browsePage,
+//                       {folderPath:currentFolder,saveAs:saveRequested});
+//        pageLoader.source = "BrowsePage.qml"
+//        pageStack.push(pageLoader.item,
+//                         {folderPath:currentFolder,saveAs:saveRequested});
+        pageStack.push(Qt.resolvedUrl("BrowsePage.qml"),
+                       {folderPath:currentFolder,saveAs:saveRequested});
     }
 
-    // TextEditor could not open a file for reading.
-    onOpenFailed: {
-        openFailedDialog.titleText = qsTr("Cannot open %1.").arg(fileName)
-        openFailedDialog.message = errorString;
-        openFailedDialog.open();
-    }
-
-    // TextEditor could not save the file.
-    onSaveFailed: {
-        saveFailedDialog.titleText = qsTr("Cannot save %1.").arg(fileName)
-        saveFailedDialog.message = errorString;
-        saveFailedDialog.open();
+    // TextEditor requested RecentPage to be opened for selecting a file.
+    onRecentRequested: {
+        pageStack.push(Qt.resolvedUrl("RecentPage.qml"))
     }
 
     // TextEditor successfully saved the editor contents to the selected file.
@@ -151,95 +128,65 @@ PageStackWindow {
         pageStack.pop();
     }
 
+    // Dialogs
+
+    // Menu>About was clicked
+    onMenuAboutClicked: {
+        myLoader.source = "DialogAbout.qml"
+        myLoader.item.show()
+    }
+
+    // Menu>Quit was selected but editor contents were not saved.
+    onAppCloseToBeConfirmed: {
+        myLoader.source = "DialogConfirmQuit.qml"
+        myLoader.item.title = qsTr("%1 changed.").arg(fileName)
+        myLoader.item.show()
+    }
+
+    // TextEditor could not open a file for reading.
+    onOpenFailed: {
+        myLoader.source = "DialogFileError.qml"
+        myLoader.item.title = qsTr("Cannot open %1.").arg(fileName)
+        myLoader.item.message = errorString;
+        myLoader.item.show()
+    }
+
+    // TextEditor could not save the file.
+    onSaveFailed: {
+        myLoader.source = "DialogFileError.qml"
+        myLoader.item.title = qsTr("Cannot save %1.").arg(fileName)
+        myLoader.item.message = errorString;
+        myLoader.item.show();
+    }
+
     // TextEditor will ask before overwriting an existing file.
     onSaveAsToBeConfirmed: {
-        saveConfirmDialog.titleText = qsTr("%1 already exists.").arg(fileName)
-        saveConfirmDialog.open();
+        myLoader.source = "DialogConfirmSave.qml"
+        myLoader.item.title = qsTr("%1 already exists.").arg(fileName)
+        myLoader.item.show()
     }
 
     // TextEditor will ask before opening a new file when editor contents changed.
-    onOpenToBeConfirmed: {
-        openConfirmDialog.titleText = qsTr("%1 changed.").arg(fileName)
-        openConfirmDialog.open();
+    onNewOrOpenToBeConfirmed: {
+        //myLoader.source = "DialogComfirmOpen.qml"
+        myLoader.source = "DialogConfirmNewOrOpen.qml"
+        myLoader.item.title = qsTr("%1 changed.").arg(fileName)
+        myLoader.item.show(op)
     }
 
-    // TextEditor will ask before starting a new file when editor contents changed.
-    onNewToBeConfirmed: {
-        newConfirmDialog.titleText = qsTr("%1 changed.").arg(fileName)
-        newConfirmDialog.open();
-    }
+//    // TextEditor will ask before opening a new file when editor contents changed.
+//    onOpenToBeConfirmed: {
+//        //myLoader.source = "DialogComfirmOpen.qml"
+//        myLoader.source = "DialogConfirmNewOrOpen.qml"
+//        myLoader.item.title = qsTr("%1 changed.").arg(fileName)
+//        myLoader.item.show("open")
+//    }
 
-    // Dialogs
-
-    // About TextEditor
-    QueryDialog {
-        id: aboutDialog
-        titleText: "TextEditor "+AppDefaults.VERSION
-        message: aboutInfo
-        acceptButtonText: qsTr("Go to homepage")
-        rejectButtonText: qsTr("Close")
-        onAccepted: {
-            Qt.openUrlExternally(AppDefaults.HOMEPAGE)
-        }
-    }
-
-    // File open error
-    QueryDialog {
-        id: openFailedDialog
-        acceptButtonText: qsTr("OK")
-    }
-
-    // File save error
-    QueryDialog {
-        id: saveFailedDialog
-        acceptButtonText: qsTr("OK")
-    }
-
-    // Overwrite confirmation
-    QueryDialog {
-        id: saveConfirmDialog
-        message: qsTr("Do you want to replace it?")
-        acceptButtonText: qsTr("Yes")
-        rejectButtonText: qsTr("No")
-        onAccepted: {
-            saveAsConfirmed(editPage.content)
-        }
-    }
-
-    // Overwrite editor contents confirmation
-    QueryDialog {
-        id: appCloseConfirmDialog
-        message: qsTr("Save before exiting?")
-        acceptButtonText: qsTr("Yes")
-        rejectButtonText: qsTr("No")
-        onAccepted: {
-            appIsClosing = true
-            saveBeforeClosed(editPage.content)
-        }
-        onRejected: {
-            appToBeClosed()
-        }
-    }
-
-    // Overwrite editor contents confirmation
-    QueryDialog {
-        id: openConfirmDialog
-        message: qsTr("Discard changes?")
-        acceptButtonText: qsTr("Yes")
-        rejectButtonText: qsTr("No")
-        onAccepted: {
-            openConfirmed()
-        }
-    }
-
-    // Overwrite editor contents confirmation
-    QueryDialog {
-        id: newConfirmDialog
-        message: qsTr("Discard changes?")
-        acceptButtonText: qsTr("Yes")
-        rejectButtonText: qsTr("No")
-        onAccepted: {
-            newConfirmed()
-        }
-    }
+//    // TextEditor will ask before starting a new file when editor contents changed.
+//    onNewToBeConfirmed: {
+//        //myLoader.source = "DialogConfirmNew.qml"
+//        myLoader.source = "DialogConfirmNewOrOpen.qml"
+//        myLoader.item.title = qsTr("%1 changed.").arg(fileName)
+//        myLoader.item.show("new")
+//    }
 }
