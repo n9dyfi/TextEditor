@@ -5,6 +5,6 @@
         <file alias="tr_ru">qml/texteditor/i18n/tr_ru.qm</file>
         <file alias="tr_hu">qml/texteditor/i18n/tr_hu.qm</file>
         <file alias="tr_de">qml/texteditor/i18n/tr_de.qm</file>
-        <file alias="tr_fr">qml/texteditor/i18n/tr_fr.ts</file>
+        <file alias="tr_fr">qml/texteditor/i18n/tr_fr.qm</file>
     </qresource>
 </RCC>

@@ -19,8 +19,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // fall back to using English translation, if one specific to the current
     // setting of the device is not available.
-    if (!(translator.load("tr_"+locale, ":/")))
-        translator.load("tr_en", ":/");
+    //if (!(translator.load("tr_"+locale, ":/")))
+    //    translator.load("tr_en", ":/");
+
+    translator.load("tr_fr",":/");
 
     app->installTranslator(&translator);
 

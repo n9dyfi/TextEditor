@@ -75,7 +75,7 @@ Page {
             id: saveasfile
             visible: saveAs
             width:parent.width;
-            placeholderText: "File to save"
+            placeholderText: qsTr("File to save")
             Keys.onReturnPressed: {
                 saveAsRequested(editPage.content,folderPath,saveasfile.text);
             }

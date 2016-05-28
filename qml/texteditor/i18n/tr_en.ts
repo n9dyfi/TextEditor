@@ -27,6 +27,11 @@
         <translation>Save</translation>
     </message>
     <message>
+        <location filename="../BrowsePage.qml" line="78"/>
+        <source>File to save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../BrowsePage.qml" line="134"/>
         <source>Refreshing</source>
         <translation>Refreshing</translation>
@@ -218,23 +223,23 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="142"/>
-        <location filename="../main.qml" line="173"/>
+        <location filename="../main.qml" line="137"/>
+        <location filename="../main.qml" line="168"/>
         <source>%1 changed.</source>
         <translation>%1 changed.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="149"/>
+        <location filename="../main.qml" line="144"/>
         <source>Cannot open %1.</source>
         <translation>Cannot open %1.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="157"/>
+        <location filename="../main.qml" line="152"/>
         <source>Cannot save %1.</source>
         <translation>Cannot save %1.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="165"/>
+        <location filename="../main.qml" line="160"/>
         <source>%1 already exists.</source>
         <translation>%1 already exists.</translation>
     </message>
