@@ -47,6 +47,16 @@
         <source>Contact</source>
         <translation>Yhteystiedot</translation>
     </message>
+    <message>
+        <location filename="../DialogAbout.qml" line="15"/>
+        <source>Go to homepage</source>
+        <translation>Avaa kotisivu</translation>
+    </message>
+    <message>
+        <location filename="../DialogAbout.qml" line="16"/>
+        <source>Close</source>
+        <translation>Sulje</translation>
+    </message>
 </context>
 <context>
     <name>DialogConfirmNew</name>

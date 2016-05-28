@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="en" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="en">
 <context>
     <name>BrowseMenu</name>
     <message>
@@ -46,6 +48,16 @@
         <location filename="../DialogAbout.qml" line="14"/>
         <source>Contact</source>
         <translation>Contact</translation>
+    </message>
+    <message>
+        <location filename="../DialogAbout.qml" line="15"/>
+        <source>Go to homepage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../DialogAbout.qml" line="16"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

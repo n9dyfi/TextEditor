@@ -83,11 +83,6 @@ PageStackWindow {
 
     // TextEditor requested BrowsePage to be opened for selecting a file.
     onBrowseRequested: {
-//        pageStack.push(browsePage,
-//                       {folderPath:currentFolder,saveAs:saveRequested});
-//        pageLoader.source = "BrowsePage.qml"
-//        pageStack.push(pageLoader.item,
-//                         {folderPath:currentFolder,saveAs:saveRequested});
         pageStack.push(Qt.resolvedUrl("BrowsePage.qml"),
                        {folderPath:currentFolder,saveAs:saveRequested});
     }
@@ -174,19 +169,4 @@ PageStackWindow {
         myLoader.item.show(op)
     }
 
-//    // TextEditor will ask before opening a new file when editor contents changed.
-//    onOpenToBeConfirmed: {
-//        //myLoader.source = "DialogComfirmOpen.qml"
-//        myLoader.source = "DialogConfirmNewOrOpen.qml"
-//        myLoader.item.title = qsTr("%1 changed.").arg(fileName)
-//        myLoader.item.show("open")
-//    }
-
-//    // TextEditor will ask before starting a new file when editor contents changed.
-//    onNewToBeConfirmed: {
-//        //myLoader.source = "DialogConfirmNew.qml"
-//        myLoader.source = "DialogConfirmNewOrOpen.qml"
-//        myLoader.item.title = qsTr("%1 changed.").arg(fileName)
-//        myLoader.item.show("new")
-//    }
 }

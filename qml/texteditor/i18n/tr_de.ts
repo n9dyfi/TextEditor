@@ -47,6 +47,16 @@
         <source>Contact</source>
         <translation>Kontakt</translation>
     </message>
+    <message>
+        <location filename="../DialogAbout.qml" line="15"/>
+        <source>Go to homepage</source>
+        <translation>Auf die website gehen</translation>
+    </message>
+    <message>
+        <location filename="../DialogAbout.qml" line="16"/>
+        <source>Close</source>
+        <translation>Schließen </translation>
+    </message>
 </context>
 <context>
     <name>DialogConfirmNew</name>

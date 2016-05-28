@@ -12,8 +12,8 @@ Item {
                  AppDefaults.HOMEPAGE+"\n"+
                  qsTr("License")+": GPL3\n"+
                  qsTr("Contact")+": <n9dyfi@gmail.com>\n";
-        acceptButtonText: "Go to homepage"
-        rejectButtonText: "Close"
+        acceptButtonText: qsTr("Go to homepage")
+        rejectButtonText: qsTr("Close")
         onAccepted: {
             Qt.openUrlExternally(AppDefaults.HOMEPAGE)
         }
