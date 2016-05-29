@@ -1,6 +1,6 @@
 #include "texteditor.h"
 #include "recentfiles.h"
-#include <QDebug>
+//#include <QDebug>
 
 // QT_TRANSLATE_NOOP is required to translate static const strings outside any context
 const char *TextEditor::UNTITLED = QT_TRANSLATE_NOOP("TextEditor","Untitled");
@@ -75,7 +75,6 @@ void TextEditor::menuOpenClicked(QString content)
 {
     if(content!=currentContent)
     {
-        //emit openToBeConfirmed(currentFile);
         emit newOrOpenToBeConfirmed("open",currentFile);
         return;
     }
@@ -88,11 +87,9 @@ void TextEditor::menuNewClicked(QString content)
 {
     if(content!=currentContent)
     {
-        //emit newToBeConfirmed(currentFile);
         emit newOrOpenToBeConfirmed("new",currentFile);
         return;
     }
-    //newConfirmed();
     newOrOpenConfirmed("new");
 }
 
