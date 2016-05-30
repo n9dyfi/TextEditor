@@ -35,7 +35,9 @@ PageStackWindow {
     signal fileOpenRequested(string fileName)
     signal saveAsConfirmed(string content)
     signal newOrOpenConfirmed(string op)
+    signal openRecentConfirmed()
     signal saveBeforeClosed(string content)
+    signal recentFileClicked(string fileName, string folderName, string content)
 
     // The corresponding TextEditor signals will be connected to these QML signals
     signal browseRequested(string currentFolder, bool saveRequested)
@@ -47,6 +49,7 @@ PageStackWindow {
     signal saveAsCompleted(string currentFolder, string currentFile)
     signal saveAsToBeConfirmed(string fileName)
     signal newOrOpenToBeConfirmed(string op, string fileName)
+    signal openRecentToBeConfirmed(string fileName)
     signal appCloseToBeConfirmed(string fileName)
     signal appToBeClosed
     signal editorCleared(string folderPath,string fileName)
@@ -163,10 +166,15 @@ PageStackWindow {
 
     // TextEditor will ask before opening a new file when editor contents changed.
     onNewOrOpenToBeConfirmed: {
-        //myLoader.source = "DialogComfirmOpen.qml"
         myLoader.source = "DialogConfirmNewOrOpen.qml"
         myLoader.item.title = qsTr("%1 changed.").arg(fileName)
         myLoader.item.show(op)
+    }
+
+    onOpenRecentToBeConfirmed: {
+        myLoader.source = "DialogConfirmOpenRecent.qml"
+        myLoader.item.title = qsTr("%1 changed.").arg(fileName)
+        myLoader.item.show()
     }
 
 }

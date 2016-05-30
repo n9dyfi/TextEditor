@@ -36,8 +36,9 @@ Page {
         model: recentfiles  // from the root context
         delegate: ListDelegate {
             onClicked: {
-                newFolderChanged(model.subtitle)
-                fileOpenRequested(model.title)
+                //newFolderChanged(model.subtitle)
+                //fileOpenRequested(model.title)
+                recentFileClicked(model.title,model.subtitle,editPage.content)
             }
         }
         anchors.top: header.bottom

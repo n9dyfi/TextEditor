@@ -36,12 +36,16 @@ TextEditor::TextEditor(QObject *qml, RecentFiles *recentfiles, QObject *parent) 
              this, SLOT(saveAsConfirmed(QString)));
     connect(qml, SIGNAL(newOrOpenConfirmed(QString)),
              this, SLOT(newOrOpenConfirmed(QString)));
+    connect(qml, SIGNAL(openRecentConfirmed()),
+             this, SLOT(openRecentConfirmed()));
     connect(qml, SIGNAL(menuQuitClicked(QString)),
              this, SLOT(menuQuitClicked(QString)));
     connect(qml, SIGNAL(saveBeforeClosed(QString)),
              this, SLOT(saveBeforeClosed(QString)));
     connect(qml, SIGNAL(menuNewClicked(QString)),
              this, SLOT(menuNewClicked(QString)));
+    connect(qml, SIGNAL(recentFileClicked(QString,QString,QString)),
+             this, SLOT(recentFileClicked(QString,QString,QString)));
 
     // connect TextEditor signals to QML signals
     connect(this, SIGNAL(browseRequested(QString,bool)),
@@ -62,6 +66,8 @@ TextEditor::TextEditor(QObject *qml, RecentFiles *recentfiles, QObject *parent) 
                qml, SLOT(saveAsToBeConfirmed(QString)));
     connect(this, SIGNAL(newOrOpenToBeConfirmed(QString,QString)),
                qml, SLOT(newOrOpenToBeConfirmed(QString,QString)));
+    connect(this, SIGNAL(openRecentToBeConfirmed(QString)),
+               qml, SLOT(openRecentToBeConfirmed(QString)));
     connect(this, SIGNAL(appCloseToBeConfirmed(QString)),
                qml, SLOT(appCloseToBeConfirmed(QString)));
     connect(this, SIGNAL(appToBeClosed()),
@@ -129,6 +135,7 @@ void TextEditor::saveAsConfirmed(QString content)
     saveCurrentContent(SAVE_AS);
 }
 
+// Discard changes and proceed with "New" or "Open"
 void TextEditor::newOrOpenConfirmed(QString op)
 {
     if(op=="new")
@@ -140,6 +147,12 @@ void TextEditor::newOrOpenConfirmed(QString op)
         bool saveRequested = false;
         emit browseRequested(currentFolder, saveRequested);
     }
+}
+
+// Discard changes and proceed with "Open recent"
+void TextEditor::openRecentConfirmed()
+{
+    fileOpenRequested(newFile);
 }
 
 // Menu>Quit was selected.
@@ -168,6 +181,20 @@ void TextEditor::saveBeforeClosed(QString content)
     newFolder = currentFolder;
     newFile = currentFile;
     saveCurrentContent(SAVE);
+}
+
+void TextEditor::recentFileClicked(QString fileName, QString folderName, QString content)
+{
+    newFolder = folderName;
+    newFile = fileName;
+    // Check if the content was changed.
+    if(content!=currentContent)
+    {
+        emit openRecentToBeConfirmed(currentFile);
+        return;
+    }
+    // Not changed -> ok to open.
+    fileOpenRequested(newFile);
 }
 
 // Save the current editor content to the current folder/file.

@@ -46,7 +46,9 @@ public slots:
     void fileOpenRequested(QString);
     void saveAsConfirmed(QString);
     void newOrOpenConfirmed(QString);
+    void openRecentConfirmed();
     void saveBeforeClosed(QString);
+    void recentFileClicked(QString,QString,QString);
 
 signals:
     void browseRequested(QString currentFolder, bool saveRequested);
@@ -58,6 +60,7 @@ signals:
     void saveAsCompleted(QString currentFolder, QString currentFile);
     void saveAsToBeConfirmed(QString fileName);
     void newOrOpenToBeConfirmed(QString op, QString fileName);
+    void openRecentToBeConfirmed(QString fileName);
     void appCloseToBeConfirmed(QString fileName);
     void appToBeClosed();
     void editorCleared(QString currentFolder, QString currentFile);
