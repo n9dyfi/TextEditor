@@ -25,6 +25,11 @@
         <translation>Mentés</translation>
     </message>
     <message>
+        <location filename="../BrowsePage.qml" line="78"/>
+        <source>File to save</source>
+        <translation>Fájl nevének megadása</translation>
+    </message>
+    <message>
         <location filename="../BrowsePage.qml" line="134"/>
         <source>Refreshing</source>
         <translation>Frissítés</translation>
@@ -47,23 +52,15 @@
         <source>Contact</source>
         <translation>Kapcsolat</translation>
     </message>
-</context>
-<context>
-    <name>DialogConfirmNew</name>
     <message>
-        <location filename="../DialogConfirmNew.qml" line="10"/>
-        <source>Discard changes?</source>
-        <translation>Elveted a módosításokat?</translation>
+        <location filename="../DialogAbout.qml" line="15"/>
+        <source>Go to homepage</source>
+        <translation>Honlap megnyitása</translation>
     </message>
     <message>
-        <location filename="../DialogConfirmNew.qml" line="11"/>
-        <source>Yes</source>
-        <translation>Igen</translation>
-    </message>
-    <message>
-        <location filename="../DialogConfirmNew.qml" line="12"/>
-        <source>No</source>
-        <translation>Nem</translation>
+        <location filename="../DialogAbout.qml" line="16"/>
+        <source>Close</source>
+        <translation>Bezárás</translation>
     </message>
 </context>
 <context>
@@ -85,19 +82,19 @@
     </message>
 </context>
 <context>
-    <name>DialogConfirmOpen</name>
+    <name>DialogConfirmOpenRecent</name>
     <message>
-        <location filename="../DialogConfirmOpen.qml" line="10"/>
+        <location filename="../DialogConfirmOpenRecent.qml" line="12"/>
         <source>Discard changes?</source>
         <translation>Elveted a módosításokat?</translation>
     </message>
     <message>
-        <location filename="../DialogConfirmOpen.qml" line="11"/>
+        <location filename="../DialogConfirmOpenRecent.qml" line="13"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../DialogConfirmOpen.qml" line="12"/>
+        <location filename="../DialogConfirmOpenRecent.qml" line="14"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
@@ -192,7 +189,7 @@
     <message>
         <location filename="../RecentPage.qml" line="30"/>
         <source>Recent Files</source>
-        <translation type="unfinished"/>
+        <translation>Legutóbb megnyitott fájlok</translation>
     </message>
 </context>
 <context>
@@ -206,23 +203,24 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="142"/>
-        <location filename="../main.qml" line="173"/>
+        <location filename="../main.qml" line="140"/>
+        <location filename="../main.qml" line="170"/>
+        <location filename="../main.qml" line="176"/>
         <source>%1 changed.</source>
         <translation>%1 módosítva lett.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="149"/>
+        <location filename="../main.qml" line="147"/>
         <source>Cannot open %1.</source>
         <translation>%1 megnyitása sikertelen!</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="157"/>
+        <location filename="../main.qml" line="155"/>
         <source>Cannot save %1.</source>
         <translation>%1 mentése sikertelen!</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="165"/>
+        <location filename="../main.qml" line="163"/>
         <source>%1 already exists.</source>
         <translation>%1 már létezik.</translation>
     </message>

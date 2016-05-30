@@ -66,24 +66,6 @@
     </message>
 </context>
 <context>
-    <name>DialogConfirmNew</name>
-    <message>
-        <location filename="../DialogConfirmNew.qml" line="10"/>
-        <source>Discard changes?</source>
-        <translation>Discard changes?</translation>
-    </message>
-    <message>
-        <location filename="../DialogConfirmNew.qml" line="11"/>
-        <source>Yes</source>
-        <translation>Yes</translation>
-    </message>
-    <message>
-        <location filename="../DialogConfirmNew.qml" line="12"/>
-        <source>No</source>
-        <translation>No</translation>
-    </message>
-</context>
-<context>
     <name>DialogConfirmNewOrOpen</name>
     <message>
         <location filename="../DialogConfirmNewOrOpen.qml" line="14"/>
@@ -102,21 +84,21 @@
     </message>
 </context>
 <context>
-    <name>DialogConfirmOpen</name>
+    <name>DialogConfirmOpenRecent</name>
     <message>
-        <location filename="../DialogConfirmOpen.qml" line="10"/>
+        <location filename="../DialogConfirmOpenRecent.qml" line="12"/>
         <source>Discard changes?</source>
-        <translation>Discard changes?</translation>
+        <translation type="unfinished">Discard changes?</translation>
     </message>
     <message>
-        <location filename="../DialogConfirmOpen.qml" line="11"/>
+        <location filename="../DialogConfirmOpenRecent.qml" line="13"/>
         <source>Yes</source>
-        <translation>Yes</translation>
+        <translation type="unfinished">Yes</translation>
     </message>
     <message>
-        <location filename="../DialogConfirmOpen.qml" line="12"/>
+        <location filename="../DialogConfirmOpenRecent.qml" line="14"/>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="unfinished">No</translation>
     </message>
 </context>
 <context>
@@ -223,23 +205,24 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="137"/>
-        <location filename="../main.qml" line="168"/>
+        <location filename="../main.qml" line="140"/>
+        <location filename="../main.qml" line="170"/>
+        <location filename="../main.qml" line="176"/>
         <source>%1 changed.</source>
         <translation>%1 changed.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="144"/>
+        <location filename="../main.qml" line="147"/>
         <source>Cannot open %1.</source>
         <translation>Cannot open %1.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="152"/>
+        <location filename="../main.qml" line="155"/>
         <source>Cannot save %1.</source>
         <translation>Cannot save %1.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="160"/>
+        <location filename="../main.qml" line="163"/>
         <source>%1 already exists.</source>
         <translation>%1 already exists.</translation>
     </message>
