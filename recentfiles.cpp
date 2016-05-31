@@ -44,6 +44,7 @@ QVariant RecentFiles::data(const QModelIndex &index, int role) const
         return QVariant();
 }
 
+// Try to read recent files list from the file $HOME/.texteditor/recentfiles.dat
 bool RecentFiles::readRecentFiles()
 {
     QDir dir;
@@ -54,7 +55,7 @@ bool RecentFiles::readRecentFiles()
     if (recentFilesLoaded)
             return(retval);
 
-    // read file names from the file $HOME/.texteditor/recentfiles.dat
+    // read file names
     dir.setCurrent(dir.homePath());
     if (dir.exists(CONFIG_FOLDER))
     {
@@ -68,7 +69,7 @@ bool RecentFiles::readRecentFiles()
                 QDataStream stream( &file );
                 stream >> newContent;
                 file.close();
-                // load the contents to the recentFiles RecentFiles
+                // store the file contents to stringList
                 store(newContent);
             } else {
                 retval = false;
@@ -76,6 +77,7 @@ bool RecentFiles::readRecentFiles()
             }
         }
     } else {
+        // create the CONFIG_FOLDER if it did not already exist
         dir.mkdir(CONFIG_FOLDER);
     }
     recentFilesLoaded = true;
