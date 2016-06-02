@@ -12,7 +12,7 @@ RecentFiles::RecentFiles(QObject *qml, QObject *parent) :
     roles[FolderRole] = "subtitle";
     roles[FileRole] = "title";
     // expose the roles to the QML side so that the ListDelegate can refer
-    // to role names "folder" and "file".
+    // to role names "subtitle" and "title".
     setRoleNames(roles);
 
     recentFilesLoaded = false;
