@@ -5,10 +5,6 @@ import "appDefaults.js" as AppDefaults
 
 Page {
 
-    property int fileLabelFontSize: AppDefaults.FONT_SIZE_SMALL
-    property int folderLabelFontSize: AppDefaults.FONT_SIZE_TINY
-    property string labelFontFamily : AppDefaults.FONT_FAMILY
-
     signal recentCancelled
 
     // Toolbar>Back was clicked in the RecentPage
@@ -22,7 +18,7 @@ Page {
         visible: true
     }
 
-    // The page header (with a Save As button if saveAs = true)
+    // The page header
     Header {
         id: header
         anchors.top: parent.top
