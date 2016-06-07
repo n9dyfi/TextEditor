@@ -1,18 +1,17 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import "appDefaults.js" as AppDefaults
 
 PageStackWindow {
 
     id: appWindow
 
     // UI constants
-    property int defaultMargin : AppDefaults.DEFAULT_MARGIN
+    property int defaultMargin : appDefaults.cDEFAULT_MARGIN
     property bool orientationIsPortrait
 
     // Select the color scheme before instantiating any QML elements
     // that need the color...
-    onDefaultMarginChanged: theme.colorScheme = AppDefaults.COLOR_SCHEME
+    onDefaultMarginChanged: theme.colorScheme = appDefaults.cCOLOR_SCHEME
 
     showStatusBar: false;
 
@@ -60,6 +59,11 @@ PageStackWindow {
         id: editPage
     }
 
+    // Application defaults, visible in all pages
+    AppDefaults {
+        id: appDefaults
+    }
+
     // QML component loader
     Loader {
         id: myLoader
@@ -71,7 +75,7 @@ PageStackWindow {
         editPage.content = ""
         editPage.currentFile = fileName
         editPage.currentFolder = folderPath
-        editPage.textAreaHeight = AppDefaults.TEXT_AREA_HEIGHT
+        editPage.textAreaHeight = appDefaults.cTEXT_AREA_HEIGHT
     }
 
     // Common exit point when Menu>Quit was selected

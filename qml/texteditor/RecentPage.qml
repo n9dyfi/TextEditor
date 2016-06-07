@@ -1,7 +1,6 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 import com.nokia.extras 1.1     // set QML_IMPORT_PATH...
-import "appDefaults.js" as AppDefaults
 
 Page {
 
@@ -36,8 +35,8 @@ Page {
             }
         }
         anchors.top: header.bottom
-        x: AppDefaults.DEFAULT_MARGIN
-        height: parent.height - header.height - AppDefaults.DEFAULT_MARGIN - recentTools.height;
+        x: appDefaults.cDEFAULT_MARGIN
+        height: parent.height - header.height - appDefaults.cDEFAULT_MARGIN - recentTools.height;
         width: parent.width;
         clip: true
     }

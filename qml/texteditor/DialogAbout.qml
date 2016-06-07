@@ -1,21 +1,20 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import "appDefaults.js" as AppDefaults
 
 Item {
     signal show
     onShow: dialog.open()
     QueryDialog {
         id: dialog
-        titleText: "TextEditor "+AppDefaults.VERSION
+        titleText: "TextEditor "+appDefaults.cVERSION
         message: qsTr("A simple text editor for the Nokia N9.") + "\n\n"+
-                 AppDefaults.HOMEPAGE+"\n"+
+                 appDefaults.cHOMEPAGE+"\n"+
                  qsTr("License")+": GPL3\n"+
                  qsTr("Contact")+": <n9dyfi@gmail.com>\n";
         acceptButtonText: qsTr("Go to homepage")
         rejectButtonText: qsTr("Close")
         onAccepted: {
-            Qt.openUrlExternally(AppDefaults.HOMEPAGE)
+            Qt.openUrlExternally(appDefaults.cHOMEPAGE)
         }
     }
 }

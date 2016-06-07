@@ -1,7 +1,6 @@
 import QtQuick 1.1
 import Qt.labs.folderlistmodel 1.0
 import com.nokia.meego 1.0
-import "appDefaults.js" as AppDefaults
 
 Page {
 
@@ -10,8 +9,8 @@ Page {
     property bool saveAs: false
 
     property string buttonBackground: "image://theme/color"+theme.colorScheme+"-meegotouch-button-accent-background"
-    property string buttonFontFamily : AppDefaults.FONT_FAMILY_BUTTON
-    property int buttonFontSize : AppDefaults.FONT_SIZE_BUTTON
+    property string buttonFontFamily : appDefaults.cFONT_FAMILY_BUTTON
+    property int buttonFontSize : appDefaults.cFONT_SIZE_BUTTON
 
     signal folderChanged(string path);
 
@@ -85,7 +84,7 @@ Page {
         ListView {
             id: listView
             clip: true
-            height: (saveAs?-saveasfile.height:0) + parent.height - header.height - AppDefaults.DEFAULT_MARGIN - browseTools.height;
+            height: (saveAs?-saveasfile.height:0) + parent.height - header.height - appDefaults.cDEFAULT_MARGIN - browseTools.height;
             width: parent.width;
 
             delegate: FileDelegate {

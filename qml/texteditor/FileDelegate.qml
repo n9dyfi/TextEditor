@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "appDefaults.js" as AppDefaults
+
 Rectangle {
     id: fileDelegate
     property bool isDir: false
@@ -7,13 +7,13 @@ Rectangle {
     width: parent.width
     height: fileNameView.height * 1.5
     color: ( mouseArea.pressed )
-           ? AppDefaults.FILE_BG_COLOR_PRESSED
-           : AppDefaults.FILE_BG_COLOR_NORMAL
+           ? appDefaults.cFILE_BG_COLOR_PRESSED
+           : appDefaults.cFILE_BG_COLOR_NORMAL
     Image
     {
         id: icon
         anchors.verticalCenter: parent.verticalCenter
-        x: AppDefaults.DEFAULT_MARGIN
+        x: appDefaults.cDEFAULT_MARGIN
         smooth: true
         source: isDir
                 ? "image://theme/icon-m-toolbar-directory-white"
@@ -24,10 +24,10 @@ Rectangle {
     Text {
         id: fileNameView
         text: fileName
-        font.pixelSize: AppDefaults.FONT_SIZE_SMALL
+        font.pixelSize: appDefaults.cFONT_SIZE_SMALL
         anchors.verticalCenter: parent.verticalCenter
         anchors.left:icon.right
-        anchors.leftMargin: AppDefaults.DEFAULT_MARGIN
+        anchors.leftMargin: appDefaults.cDEFAULT_MARGIN
     }
 
     MouseArea {

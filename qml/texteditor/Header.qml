@@ -1,6 +1,5 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import "appDefaults.js" as AppDefaults
 
 Item {
     property alias headerText: titleLabel.text
@@ -9,21 +8,21 @@ Item {
     property bool singleLineHeader: true
 
     property string viewHeader: "image://theme/color"+theme.colorScheme+"-meegotouch-view-header-fixed"
-    property int headerTopSpacing : (inPortrait)?AppDefaults.HEADER_DEFAULT_TOP_SPACING_PORTRAIT:
-                         AppDefaults.HEADER_DEFAULT_TOP_SPACING_LANDSCAPE
-    property int headerBottomSpacing : (inPortrait)?AppDefaults.HEADER_DEFAULT_BOTTOM_SPACING_PORTRAIT:
-                         AppDefaults.HEADER_DEFAULT_BOTTOM_SPACING_LANDSCAPE
+    property int headerTopSpacing : (inPortrait)?appDefaults.cHEADER_DEFAULT_TOP_SPACING_PORTRAIT:
+                         appDefaults.cHEADER_DEFAULT_TOP_SPACING_LANDSCAPE
+    property int headerBottomSpacing : (inPortrait)?appDefaults.cHEADER_DEFAULT_BOTTOM_SPACING_PORTRAIT:
+                         appDefaults.cHEADER_DEFAULT_BOTTOM_SPACING_LANDSCAPE
     property int infoBottomSpacing : (inPortrait)?
-                                         0.75*AppDefaults.HEADER_DEFAULT_BOTTOM_SPACING_PORTRAIT:
-                                         0.5*AppDefaults.HEADER_DEFAULT_BOTTOM_SPACING_LANDSCAPE
-    property string headerFontFamily : AppDefaults.FONT_FAMILY
-    property int headerFontSize : AppDefaults.FONT_SIZE_LARGE
-    property int infoTopFontSize: AppDefaults.FONT_SIZE_SMALL
-    property int infoBottomFontSize: AppDefaults.FONT_SIZE_TINY
+                                         0.75*appDefaults.cHEADER_DEFAULT_BOTTOM_SPACING_PORTRAIT:
+                                         0.5*appDefaults.cHEADER_DEFAULT_BOTTOM_SPACING_LANDSCAPE
+    property string headerFontFamily : appDefaults.cFONT_FAMILY
+    property int headerFontSize : appDefaults.cFONT_SIZE_LARGE
+    property int infoTopFontSize: appDefaults.cFONT_SIZE_SMALL
+    property int infoBottomFontSize: appDefaults.cFONT_SIZE_TINY
 
     // header dimensions
-    height: (inPortrait)?AppDefaults.HEADER_DEFAULT_HEIGHT_PORTRAIT:
-                          AppDefaults.HEADER_DEFAULT_HEIGHT_LANDSCAPE
+    height: (inPortrait)?appDefaults.cHEADER_DEFAULT_HEIGHT_PORTRAIT:
+                          appDefaults.cHEADER_DEFAULT_HEIGHT_LANDSCAPE
     width: parent.width
 
     // Header background image
