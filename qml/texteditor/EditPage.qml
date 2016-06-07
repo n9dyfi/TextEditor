@@ -100,10 +100,4 @@ Page {
             }
         }
     ]
-
-//    Component.onDestruction: {
-//        console.debug("EditPage: onDestruction")
-//        menuQuitClicked(editPage.content);
-//    }
-
 }

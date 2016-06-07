@@ -86,7 +86,6 @@ Page {
             id: listView
             clip: true
             height: (saveAs?-saveasfile.height:0) + parent.height - header.height - AppDefaults.DEFAULT_MARGIN - browseTools.height;
-            //height: parent.height - header.height - AppDefaults.DEFAULT_MARGIN - browseTools.height;
             width: parent.width;
 
             delegate: FileDelegate {

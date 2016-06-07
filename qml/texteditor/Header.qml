@@ -78,7 +78,6 @@ Item {
         platformStyle: infoBottomStyle
         visible: !singleLineHeader
         anchors {
-            //top:infoTop.bottom;
             bottom:parent.bottom; bottomMargin:infoBottomSpacing;
             left:parent.left; leftMargin:defaultMargin
         }
