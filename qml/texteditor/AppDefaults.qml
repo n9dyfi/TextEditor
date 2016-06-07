@@ -18,11 +18,11 @@ Item {
     property int cHEADER_DEFAULT_TOP_SPACING_LANDSCAPE : 9
     property int cHEADER_DEFAULT_BOTTOM_SPACING_LANDSCAPE : 13
 
-    property string cFONT_FAMILY : "Nokia cure Text Light"
+    property string cFONT_FAMILY : "Nokia pure Text Light"
     property int cFONT_SIZE_LARGE : 32
     property int cFONT_SIZE_SMALL : 24
     property int cFONT_SIZE_TINY : 18
-    property string cFONT_FAMILY_BUTTON : "Nokia cure Text"
+    property string cFONT_FAMILY_BUTTON : "Nokia pure Text"
     property int cFONT_SIZE_BUTTON : 20
 
     property int cTEXT_AREA_HEIGHT : 60
