@@ -22,8 +22,8 @@ TextEditor::TextEditor(QObject *qml, RecentFiles *recentfiles, QObject *parent) 
              this, SLOT(menuOpenClicked(QString)));
     connect(qml, SIGNAL(toolSaveClicked(QString)),
              this, SLOT(toolSaveClicked(QString)));
-    connect(qml, SIGNAL(toolRecentClicked(QString)),
-             this, SLOT(toolRecentClicked(QString)));
+    connect(qml, SIGNAL(toolRecentClicked()),
+             this, SLOT(toolRecentClicked()));
     connect(qml, SIGNAL(menuSaveAsClicked()),
              this, SLOT(menuSaveAsClicked()));
     connect(qml, SIGNAL(saveAsRequested(QString,QString)),
@@ -114,7 +114,7 @@ void TextEditor::toolSaveClicked(QString content)
 }
 
 // EditPage toolbar: Recent Files was clicked
-void TextEditor::toolRecentClicked(QString content)
+void TextEditor::toolRecentClicked()
 {
     bool statusOk = recentFiles->readRecentFiles();
     if (statusOk)

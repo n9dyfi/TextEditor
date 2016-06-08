@@ -40,7 +40,7 @@ public slots:
     void menuSaveAsClicked();
     void menuQuitClicked(QString);
     void toolSaveClicked(QString);
-    void toolRecentClicked(QString);
+    void toolRecentClicked();
     void saveAsRequested(QString,QString);
     void newFolderChanged(QString);
     void fileOpenRequested(QString);

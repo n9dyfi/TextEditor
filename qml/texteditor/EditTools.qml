@@ -19,7 +19,7 @@ ToolBar {
             platformIconId: "icon-m-toolbar-captured-dimmed-white"
             anchors.left: (parent === undefined) ? undefined : parent.center
             onClicked: {
-                toolRecentClicked(editPage.content)
+                toolRecentClicked()
             }
         }
         // Menu button

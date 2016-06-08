@@ -28,7 +28,7 @@ PageStackWindow {
     signal menuSaveAsClicked()
     signal menuQuitClicked(string content)
     signal toolSaveClicked(string content)
-    signal toolRecentClicked(string content)
+    signal toolRecentClicked()
     signal newFolderChanged(string newFolder)
     signal saveAsRequested(string content, string fileName)
     signal fileOpenRequested(string fileName)
