@@ -1,3 +1,4 @@
+#include <QtGui/QApplication>
 #include <QDir>
 #include "recentfiles.h"
 
@@ -18,8 +19,14 @@ RecentFiles::RecentFiles(QObject *qml, QObject *parent) :
     recentFilesLoaded = false;
     recentFilesModified = false;
 
+    // Display and error message if we cannot open the file
+    // containing the recent files list
     connect(this, SIGNAL(openFailed(QString,QString)),
                qml, SLOT(openFailed(QString,QString)));
+
+    // Catch application exit to save the recent files list
+    connect(QCoreApplication::instance(),SIGNAL(aboutToQuit()),
+               this,SLOT(writeRecentFiles()));
 
 }
 
@@ -70,7 +77,7 @@ bool RecentFiles::readRecentFiles()
                 stream >> newContent;
                 file.close();
                 // store the file contents to stringList
-                store(newContent);
+                stringList = newContent;
             } else {
                 retval = false;
                 emit openFailed(RECENT_FILES,file.errorString());
@@ -82,12 +89,6 @@ bool RecentFiles::readRecentFiles()
     }
     recentFilesLoaded = true;
     return(retval);
-}
-
-// Store list of files (replace current contents)
-void RecentFiles::store(const QStringList newContent)
-{
-    stringList = newContent;
 }
 
 // Add file specification to the beginning of the list
@@ -133,8 +134,8 @@ void RecentFiles::removeFile(const QString fileSpec)
     stringList.removeAt(index);
 }
 
-// application is closing, save the recent files list
-void RecentFiles::closing()
+// Save the recent files list to file
+void RecentFiles::writeRecentFiles()
 {
     // Did we modify the recent files list?
     if (!recentFilesModified)

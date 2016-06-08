@@ -25,7 +25,6 @@ public:
 
     // Methods for internal data processing
     bool readRecentFiles();
-    void store(const QStringList newContent);
     void addFile(const QString fileSpec);
     void removeFile(const QString fileSpec);
 
@@ -45,7 +44,7 @@ signals:
     void openFailed(QString fileName, QString errorString);
 
 public slots:
-    void closing();
+    void writeRecentFiles();
 };
 
 #endif // RECENTFILES_H
