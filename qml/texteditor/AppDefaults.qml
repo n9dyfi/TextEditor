@@ -5,7 +5,7 @@ Item {
     property string cFILE_BG_COLOR_NORMAL : "#00AAAAAA"
     property string cFILE_BG_COLOR_PRESSED : "steelblue"
 
-    property string cVERSION : "1.4"
+    property string cVERSION : "1.5"
     property string cHOMEPAGE : "http://n9dyfi.github.io/TextEditor"
     property int cCOLOR_SCHEME : 18
     property int cDEFAULT_MARGIN : 16

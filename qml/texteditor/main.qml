@@ -37,6 +37,7 @@ PageStackWindow {
     signal openRecentConfirmed()
     signal saveBeforeClosed(string content)
     signal recentFileClicked(string fileName, string folderName, string content)
+    signal clearRecentClicked()
 
     // The corresponding TextEditor signals will be connected to these QML signals
     signal browseRequested(string currentFolder, bool saveRequested)

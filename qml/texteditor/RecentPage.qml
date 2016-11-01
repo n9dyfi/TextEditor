@@ -30,8 +30,15 @@ Page {
         id: listView
         model: recentfiles  // from the root context
         delegate: ListDelegate {
+            id: listDelegate
             onClicked: {
                 recentFileClicked(model.title,model.subtitle,editPage.content)
+            }
+            ListView.onRemove:
+            SequentialAnimation {
+                PropertyAction { target: listDelegate; property: "ListView.delayRemove"; value: true }
+                NumberAnimation { target: listDelegate; property: "scale"; to: 0; duration: 250; easing.type: Easing.InOutQuad }
+                PropertyAction { target: listDelegate; property: "ListView.delayRemove"; value: false }
             }
         }
         anchors.top: header.bottom

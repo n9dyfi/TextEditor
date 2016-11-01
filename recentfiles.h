@@ -22,6 +22,7 @@ public:
     // rowCount() and data() functions.
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
 
     // Methods for internal data processing
     bool readRecentFiles();
@@ -45,6 +46,7 @@ signals:
 
 public slots:
     void writeRecentFiles();
+    void clearFiles();
 };
 
 #endif // RECENTFILES_H

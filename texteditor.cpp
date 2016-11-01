@@ -49,31 +49,31 @@ TextEditor::TextEditor(QObject *qml, RecentFiles *recentfiles, QObject *parent) 
 
     // connect TextEditor signals to QML signals
     connect(this, SIGNAL(browseRequested(QString,bool)),
-               qml, SLOT(browseRequested(QString,bool)));
+               qml, SIGNAL(browseRequested(QString,bool)));
     connect(this, SIGNAL(recentRequested()),
-               qml, SLOT(recentRequested()));
+               qml, SIGNAL(recentRequested()));
     connect(this, SIGNAL(openCompleted(QString,QString,QString)),
-               qml, SLOT(openCompleted(QString,QString,QString)));
+               qml, SIGNAL(openCompleted(QString,QString,QString)));
     connect(this, SIGNAL(openFailed(QString,QString)),
-               qml, SLOT(openFailed(QString,QString)));
+               qml, SIGNAL(openFailed(QString,QString)));
     connect(this, SIGNAL(saveCompleted()),
-               qml, SLOT(saveCompleted()));
+               qml, SIGNAL(saveCompleted()));
     connect(this, SIGNAL(saveFailed(QString,QString)),
-               qml, SLOT(saveFailed(QString,QString)));
+               qml, SIGNAL(saveFailed(QString,QString)));
     connect(this, SIGNAL(saveAsCompleted(QString,QString)),
-               qml, SLOT(saveAsCompleted(QString,QString)));
+               qml, SIGNAL(saveAsCompleted(QString,QString)));
     connect(this, SIGNAL(saveAsToBeConfirmed(QString)),
-               qml, SLOT(saveAsToBeConfirmed(QString)));
+               qml, SIGNAL(saveAsToBeConfirmed(QString)));
     connect(this, SIGNAL(newOrOpenToBeConfirmed(QString,QString)),
-               qml, SLOT(newOrOpenToBeConfirmed(QString,QString)));
+               qml, SIGNAL(newOrOpenToBeConfirmed(QString,QString)));
     connect(this, SIGNAL(openRecentToBeConfirmed(QString)),
-               qml, SLOT(openRecentToBeConfirmed(QString)));
+               qml, SIGNAL(openRecentToBeConfirmed(QString)));
     connect(this, SIGNAL(appCloseToBeConfirmed(QString)),
-               qml, SLOT(appCloseToBeConfirmed(QString)));
+               qml, SIGNAL(appCloseToBeConfirmed(QString)));
     connect(this, SIGNAL(appToBeClosed()),
-               qml, SLOT(appToBeClosed()));
+               qml, SIGNAL(appToBeClosed()));
     connect(this, SIGNAL(editorCleared(QString,QString)),
-               qml, SLOT(editorCleared(QString,QString)));
+               qml, SIGNAL(editorCleared(QString,QString)));
 }
 
 // QML menu: Open was clicked

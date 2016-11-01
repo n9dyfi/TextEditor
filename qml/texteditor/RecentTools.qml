@@ -12,5 +12,10 @@ ToolBar {
                                         "toolbar-back-landscape-dimmed-white"
             onClicked: recentCancelled()
         }
+        // Clear the recent files list
+        ToolIcon {
+            platformIconId: "toolbar-delete-dimmed-white"
+            onClicked: clearRecentClicked()
+        }
     }
 }

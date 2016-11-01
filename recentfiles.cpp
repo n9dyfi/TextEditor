@@ -22,7 +22,10 @@ RecentFiles::RecentFiles(QObject *qml, QObject *parent) :
     // Display and error message if we cannot open the file
     // containing the recent files list
     connect(this, SIGNAL(openFailed(QString,QString)),
-               qml, SLOT(openFailed(QString,QString)));
+               qml, SIGNAL(openFailed(QString,QString)));
+
+    // The delete button was clicked
+    connect(qml, SIGNAL(clearRecentClicked()), this, SLOT(clearFiles()));
 
     // Catch application exit to save the recent files list
     connect(QCoreApplication::instance(),SIGNAL(aboutToQuit()),
@@ -49,6 +52,16 @@ QVariant RecentFiles::data(const QModelIndex &index, int role) const
         return stringList.at(index.row()).split("|")[1];
     else
         return QVariant();
+}
+
+bool RecentFiles::removeRows(int row, int count, const QModelIndex &parent)
+{
+    beginRemoveRows(parent,row,row+count-1);
+    while(count--)
+        stringList.removeAt(row+count);
+    endRemoveRows();
+    recentFilesModified = true;
+    return true;
 }
 
 // Try to read recent files list from the file $HOME/.texteditor/recentfiles.dat
@@ -132,6 +145,14 @@ void RecentFiles::removeFile(const QString fileSpec)
 
     // remove the file from the list
     stringList.removeAt(index);
+}
+
+// Remove all files from the list
+void RecentFiles::clearFiles()
+{
+    int nElems = stringList.count();
+    if(nElems)
+        removeRows(0,nElems);
 }
 
 // Save the recent files list to file

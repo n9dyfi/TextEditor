@@ -1,3 +1,8 @@
+texteditor (1.5.0) stable; urgency=low
+  * Added trashcan to the recent files page to clear the file list.
+
+ -- n9dyfi <n9dyfi@gmail.com>  Tue, 01 Nov 2016 07:11:04 +0200
+
 texteditor (1.4.0) stable; urgency=low
   * Added recent files page.
 
